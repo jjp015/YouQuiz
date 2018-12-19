@@ -27,8 +27,51 @@
         android:id="@+id/option"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/question" >
+        android:layout_below="@id/question">
     </Spinner>
 
+    <RelativeLayout
+        android:id="@+id/multiple_choice"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/option">
+        <View
+            android:id="@+id/center"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"/>
+
+        <EditText
+            android:id="@+id/choice_a"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/center"
+            android:hint="@string/option_a"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/choice_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/center"
+            android:hint="@string/option_b"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/choice_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_toStartOf="@id/center"
+            android:layout_below="@id/choice_a"
+            android:hint="@string/option_c"
+            android:gravity="center"/>
+        <EditText
+            android:id="@+id/choice_d"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/choice_b"
+            android:layout_toEndOf="@id/choice_c"
+            android:hint="@string/option_d"
+            android:gravity="center"/>
+    </RelativeLayout>
 
 </RelativeLayout>
