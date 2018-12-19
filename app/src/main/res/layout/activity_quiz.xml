@@ -32,13 +32,14 @@
 
     <RelativeLayout
         android:id="@+id/multiple_choice"
-        android:layout_width="match_parent"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/option">
+        android:layout_below="@id/option"
+        android:visibility="gone">
         <View
-            android:id="@+id/center"
+            android:id="@+id/view_center"
             android:layout_width="0dp"
-            android:layout_height="match_parent"
+            android:layout_height="0dp"
             android:visibility="invisible"
             android:layout_centerHorizontal="true"/>
 
@@ -46,21 +47,21 @@
             android:id="@+id/choice_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/center"
+            android:layout_toStartOf="@id/view_center"
             android:hint="@string/option_a"
             android:gravity="center"/>
         <EditText
             android:id="@+id/choice_b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toEndOf="@id/center"
+            android:layout_toEndOf="@id/view_center"
             android:hint="@string/option_b"
             android:gravity="center"/>
         <EditText
             android:id="@+id/choice_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/center"
+            android:layout_toStartOf="@id/view_center"
             android:layout_below="@id/choice_a"
             android:hint="@string/option_c"
             android:gravity="center"/>
@@ -74,4 +75,13 @@
             android:gravity="center"/>
     </RelativeLayout>
 
+    <EditText
+        android:id="@+id/short_answer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/option"
+        android:hint="@string/short_answer_fill"
+        android:gravity="center"
+        android:inputType="text"
+        android:visibility="gone" />
 </RelativeLayout>

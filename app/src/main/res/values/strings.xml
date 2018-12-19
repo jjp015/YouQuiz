@@ -1,7 +1,7 @@
 <resources>
     <string name="app_name">YouQuiz</string>
     <string name="instruction">Enter in question and select the type of option to answer</string>
-    <string name="hint">Submit Question</string>
+    <string name="hint">Type in the question here</string>
     <string name="prompt">Select Option</string>
     <string-array name="answer_option">
         <item>Select Option</item>
@@ -14,4 +14,9 @@
     <string name="option_b">Option B</string>
     <string name="option_c">Option C</string>
     <string name="option_d">Option D</string>
+    <string name="true_button">True</string>
+    <string name="false_button">False</string>
+    <string name="prev_button">Prev</string>
+    <string name="next_button">Next</string>
+    <string name="short_answer_fill">Fill short answer</string>
 </resources>
