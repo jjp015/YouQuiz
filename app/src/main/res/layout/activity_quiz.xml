@@ -21,7 +21,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/instruction"
-        android:hint="@string/hint"/>
+        android:hint="@string/hint"
+        android:inputType="textCapSentences"/>
 
     <Spinner
         android:id="@+id/option"
@@ -49,14 +50,16 @@
             android:layout_height="wrap_content"
             android:layout_toStartOf="@id/view_center"
             android:hint="@string/option_a"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="textCapSentences"/>
         <EditText
             android:id="@+id/choice_b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_toEndOf="@id/view_center"
             android:hint="@string/option_b"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="textCapSentences"/>
         <EditText
             android:id="@+id/choice_c"
             android:layout_width="match_parent"
@@ -64,7 +67,8 @@
             android:layout_toStartOf="@id/view_center"
             android:layout_below="@id/choice_a"
             android:hint="@string/option_c"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="textCapSentences"/>
         <EditText
             android:id="@+id/choice_d"
             android:layout_width="match_parent"
@@ -72,7 +76,8 @@
             android:layout_below="@id/choice_b"
             android:layout_toEndOf="@id/choice_c"
             android:hint="@string/option_d"
-            android:gravity="center"/>
+            android:gravity="center"
+            android:inputType="textCapSentences"/>
     </RelativeLayout>
 
     <EditText
@@ -82,6 +87,6 @@
         android:layout_below="@id/option"
         android:hint="@string/short_answer_fill"
         android:gravity="center"
-        android:inputType="text"
-        android:visibility="gone" />
+        android:inputType="textCapSentences"
+        android:visibility="gone"/>
 </RelativeLayout>
