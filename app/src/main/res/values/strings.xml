@@ -1,0 +1,12 @@
+<resources>
+    <string name="app_name">YouQuiz</string>
+    <string name="instruction">Enter in question and select the type of option to answer</string>
+    <string name="hint">Submit Question</string>
+    <string name="prompt">Select Option</string>
+    <string name="entries">
+        <item>Multiple Choice</item>
+        <item>True/False</item>
+        <item>Multiple Answer Choice</item>
+        <item>Short Answer</item>
+    </string>
+</resources>
