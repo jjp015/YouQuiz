@@ -21,15 +21,12 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/instruction"
-        android:hint="@string/hint" />
+        android:hint="@string/hint"/>
 
     <Spinner
-        android:id="@+id/entries"
-        android:layout_width="96dp"
+        android:id="@+id/option"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/question"
-        android:entries="@string/entries"
-        android:prompt="@string/prompt" >
-    </Spinner>
 
 </RelativeLayout>
