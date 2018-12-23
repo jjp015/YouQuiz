@@ -24,26 +24,15 @@
         app:hintEnabled="false"
         app:errorEnabled="true"
         app:counterEnabled="true"
-        app:counterMaxLength="5" >
+        app:counterMaxLength="500" >
 
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="@string/hint" />
-
     </android.support.design.widget.TextInputLayout>
 
-    <!-- <EditText
-        android:id="@+id/question"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="@string/hint"
-        android:inputType="textCapSentences"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true" />
--->
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="fill_parent"
@@ -54,7 +43,7 @@
         android:id="@+id/multiple_choice"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:visibility="gone">
+        >
         <View
             android:id="@+id/view_center"
             android:layout_width="0dp"
@@ -62,42 +51,87 @@
             android:visibility="invisible"
             android:layout_centerHorizontal="true"/>
 
-        <EditText
-            android:id="@+id/choice_a"
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/view_center" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_a"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/option_a"
+                android:inputType="textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_b"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/view_center" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_b"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/option_b"
+                android:inputType="textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_c"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@id/view_center"
-            android:hint="@string/option_a"
-            android:gravity="center"
-            android:inputType="textCapSentences" />
-        <EditText
-            android:id="@+id/choice_b"
+            android:layout_below="@id/text_input_layout_a" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_c"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/option_c"
+                android:inputType="textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
+
+        <android.support.design.widget.TextInputLayout
+            android:id="@+id/text_input_layout_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            app:hintEnabled="false"
+            app:errorEnabled="true"
+            app:counterEnabled="true"
+            app:counterMaxLength="15"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/view_center"
-            android:hint="@string/option_b"
-            android:gravity="center"
-            android:inputType="textCapSentences"/>
-        <EditText
-            android:id="@+id/choice_c"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toStartOf="@id/view_center"
-            android:layout_below="@id/choice_a"
-            android:hint="@string/option_c"
-            android:gravity="center"
-            android:inputType="textCapSentences"/>
-        <EditText
-            android:id="@+id/choice_d"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_below="@id/choice_b"
-            android:layout_toEndOf="@id/choice_c"
-            android:hint="@string/option_d"
-            android:gravity="center"
-            android:inputType="textCapSentences"/>
+            android:layout_below="@id/text_input_layout_b"
+            android:layout_toEndOf="@id/text_input_layout_c" >
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/edit_text_d"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:hint="@string/option_d"
+                android:inputType="textCapSentences" />
+        </android.support.design.widget.TextInputLayout>
     </RelativeLayout>
 
 
