@@ -22,10 +22,13 @@
         android:layout_height="wrap_content"
         android:layout_below="@id/instruction"
         android:hint="@string/hint"
-        android:inputType="textCapSentences"/>
+        android:inputType="textCapSentences"
+        android:clickable="true"
+        android:focusable="true"
+        android:focusableInTouchMode="true" />
 
     <Spinner
-        android:id="@+id/option"
+        android:id="@+id/spinner"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:layout_below="@id/question">
@@ -35,7 +38,7 @@
         android:id="@+id/multiple_choice"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@id/option"
+        android:layout_below="@id/spinner"
         android:visibility="gone">
         <View
             android:id="@+id/view_center"
@@ -84,9 +87,15 @@
         android:id="@+id/short_answer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/option"
+        android:layout_below="@id/spinner"
         android:hint="@string/short_answer_fill"
         android:gravity="center"
         android:inputType="textCapSentences"
+        android:visibility="gone"/>
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
         android:visibility="gone"/>
 </RelativeLayout>
