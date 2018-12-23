@@ -9,6 +9,9 @@
     android:paddingRight="16dp"
     android:paddingTop="10dp"
     android:paddingBottom="10dp"
+    android:clickable="true"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".QuizActivity">
 
     <TextView
@@ -21,9 +24,6 @@
         android:id="@+id/text_input_layout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:clickable="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true"
         app:hintEnabled="false"
         app:errorEnabled="true"
         app:counterEnabled="true"

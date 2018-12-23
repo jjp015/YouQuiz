@@ -22,7 +22,8 @@ public class QuizActivity extends AppCompatActivity {
     private TextInputLayout mTextInputLayout;
     private TextInputEditText mEditText;
 
-    private TextInputLayout mQuestion;
+    private Spinner mSpinner;
+    private TextInputEditText mInputEditText;
     private Button mTrueButton, mFalseButton;
     private RadioGroup mMultipleChoice;
     private CheckBox mMultipleAnswer;
@@ -75,8 +76,48 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mQuestion = (TextInputLayout) findViewById(R.id.text_input_layout);
-        mQuestion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text);
+        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_a);
+        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_b);
+        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_c);
+        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_d);
+        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
