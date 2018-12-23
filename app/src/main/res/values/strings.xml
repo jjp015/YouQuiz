@@ -1,6 +1,6 @@
 <resources>
     <string name="app_name">YouQuiz</string>
-    <string name="instruction">Enter in question and select the type of option to answer</string>
+    <string name="instruction">Enter in question and select the type of question</string>
     <string name="hint">Type in the question here</string>
     <string name="prompt">Select Option</string>
     <string-array name="answer_option">

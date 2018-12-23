@@ -1,7 +1,11 @@
 package com.example.jeremy.youquiz;
 
+import android.support.design.widget.TextInputEditText;
+import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
@@ -15,6 +19,9 @@ import android.widget.Spinner;
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
+    TextInputLayout mTextInputLayout;
+    TextInputEditText mEditText;
+
     private EditText mQuestion;
     private Button mTrueButton, mFalseButton;
     private RadioGroup mMultipleChoice;
@@ -27,6 +34,7 @@ public class QuizActivity extends AppCompatActivity {
     private double mScore = 0;
 
     public QuizActivity() {
+
     }
 
     @Override
@@ -46,6 +54,30 @@ public class QuizActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
 
+        mTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout);
+        mEditText = (TextInputEditText) findViewById(R.id.edit_text);
+
+        mEditText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+            }
+
+            @Override
+            public void afterTextChanged(Editable s) {
+
+                if (s.length() > mTextInputLayout.getCounterMaxLength())
+                    mTextInputLayout.setError("Max character length is " + mTextInputLayout.getCounterMaxLength());
+                else
+                    mTextInputLayout.setError(null);
+            }
+        });
+/*
         mQuestion = (EditText) findViewById(R.id.question);
         mQuestion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
@@ -55,10 +87,11 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
+        */
     }
-
+/*
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(QuizActivity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }
+    }*/
 }
