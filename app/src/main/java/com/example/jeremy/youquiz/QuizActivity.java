@@ -19,10 +19,10 @@ import android.widget.Spinner;
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
-    TextInputLayout mTextInputLayout;
-    TextInputEditText mEditText;
+    private TextInputLayout mTextInputLayout;
+    private TextInputEditText mEditText;
 
-    private EditText mQuestion;
+    private TextInputLayout mQuestion;
     private Button mTrueButton, mFalseButton;
     private RadioGroup mMultipleChoice;
     private CheckBox mMultipleAnswer;
@@ -75,91 +75,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_a);
-        mEditText = (TextInputEditText) findViewById(R.id.edit_text_a);
-
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > mTextInputLayout.getCounterMaxLength())
-                    mTextInputLayout.setError("Max character length is " + mTextInputLayout.getCounterMaxLength());
-                else
-                    mTextInputLayout.setError(null);
-            }
-        });
-
-        mTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_b);
-        mEditText = (TextInputEditText) findViewById(R.id.edit_text_b);
-
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > mTextInputLayout.getCounterMaxLength())
-                    mTextInputLayout.setError("Max character length is " + mTextInputLayout.getCounterMaxLength());
-                else
-                    mTextInputLayout.setError(null);
-            }
-        });
-
-        mTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_c);
-        mEditText = (TextInputEditText) findViewById(R.id.edit_text_c);
-
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > mTextInputLayout.getCounterMaxLength())
-                    mTextInputLayout.setError("Max character length is " + mTextInputLayout.getCounterMaxLength());
-                else
-                    mTextInputLayout.setError(null);
-            }
-        });
-
-        mTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout_d);
-        mEditText = (TextInputEditText) findViewById(R.id.edit_text_d);
-
-        mEditText.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence s, int start, int count, int after) {
-            }
-
-            @Override
-            public void onTextChanged(CharSequence s, int start, int before, int count) {
-            }
-
-            @Override
-            public void afterTextChanged(Editable s) {
-                if (s.length() > mTextInputLayout.getCounterMaxLength())
-                    mTextInputLayout.setError("Max character length is " + mTextInputLayout.getCounterMaxLength());
-                else
-                    mTextInputLayout.setError(null);
-            }
-        });
-/*
-        mQuestion = (EditText) findViewById(R.id.question);
+        mQuestion = (TextInputLayout) findViewById(R.id.text_input_layout);
         mQuestion.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -168,11 +84,10 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
-        */
     }
-/*
+
     public void hideKeyboard(View view) {
         InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(QuizActivity.INPUT_METHOD_SERVICE);
         inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
-    }*/
+    }
 }
