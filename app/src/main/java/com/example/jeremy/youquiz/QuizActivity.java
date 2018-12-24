@@ -1,5 +1,6 @@
 package com.example.jeremy.youquiz;
 
+import android.annotation.SuppressLint;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -8,23 +9,26 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioGroup;
+import android.widget.RelativeLayout;
 import android.widget.Spinner;
 
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
-    private TextInputLayout mTextInputLayout;
+    private RelativeLayout mMultipleInput;
+    private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
     private TextInputEditText mEditText;
 
     private Spinner mSpinner;
     private TextInputEditText mInputEditText;
-    private Button mTrueButton, mFalseButton;
+    private Button mSubmitButton;
     private RadioGroup mMultipleChoice;
     private CheckBox mMultipleAnswer;
     private EditText mShortAnswer;
@@ -38,6 +42,7 @@ public class QuizActivity extends AppCompatActivity {
 
     }
 
+    @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         if (savedInstanceState != null)
@@ -46,17 +51,59 @@ public class QuizActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
-        Spinner spinner = (Spinner) findViewById(R.id.spinner);
+        mSpinner = findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.answer_option, android.R.layout.simple_spinner_item);
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
-        spinner.setAdapter(adapter);
+        mSpinner.setAdapter(adapter);
 
-        mTextInputLayout = (TextInputLayout) findViewById(R.id.text_input_layout);
-        mEditText = (TextInputEditText) findViewById(R.id.edit_text);
+        mSubmitButton = findViewById(R.id.submit_button);
+        mMultipleInput = findViewById(R.id.multiple_input);
+        mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
+
+        mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                String text = parent.getSelectedItem().toString();
+
+                if (text.equals("Select Option")) {
+                    mMultipleInput.setVisibility(View.GONE);
+                    mTextShortAnswerLayout.setVisibility(View.GONE);
+                    mSubmitButton.setVisibility(View.GONE);
+                }
+                else if (text.equals("Multiple Choice")) {
+                    mMultipleInput.setVisibility(View.VISIBLE);
+                    mTextShortAnswerLayout.setVisibility(View.GONE);
+                    mSubmitButton.setVisibility(View.VISIBLE);
+                }
+                else if(text.equals("True/False")) {
+                    mMultipleInput.setVisibility(View.GONE);
+                    mTextShortAnswerLayout.setVisibility(View.GONE);
+                    mSubmitButton.setVisibility(View.VISIBLE);
+                }
+                else if(text.equals("Multiple Answer Choices")) {
+                    mMultipleInput.setVisibility(View.VISIBLE);
+                    mTextShortAnswerLayout.setVisibility(View.GONE);
+                    mSubmitButton.setVisibility(View.VISIBLE);
+                }
+                else if(text.equals("Short Answer")) {
+                    mMultipleInput.setVisibility(View.GONE);
+                    mTextShortAnswerLayout.setVisibility(View.VISIBLE);
+                    mSubmitButton.setVisibility(View.VISIBLE);
+                }
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+
+            }
+        });
+
+        mTextInputLayout = findViewById(R.id.text_input_layout);
+        mEditText = findViewById(R.id.edit_text);
 
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
@@ -76,7 +123,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text);
+        mInputEditText = findViewById(R.id.edit_text);
         mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -86,7 +133,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_a);
+        mInputEditText = findViewById(R.id.edit_text_a);
         mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -96,7 +143,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_b);
+        mInputEditText = findViewById(R.id.edit_text_b);
         mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -106,7 +153,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_c);
+        mInputEditText = findViewById(R.id.edit_text_c);
         mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -116,7 +163,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = (TextInputEditText) findViewById(R.id.edit_text_d);
+        mInputEditText = findViewById(R.id.edit_text_d);
         mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
