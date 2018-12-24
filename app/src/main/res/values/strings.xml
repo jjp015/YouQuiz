@@ -20,4 +20,5 @@
     <string name="next_button">Next</string>
     <string name="short_answer_fill">Fill short answer</string>
     <string name="submit_button">Submit</string>
+    <string name ="empty_toast">Please fill in the input field(s)!</string>
 </resources>

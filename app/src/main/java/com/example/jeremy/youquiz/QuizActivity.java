@@ -7,6 +7,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -18,6 +20,7 @@ import android.widget.ImageButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
@@ -27,7 +30,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextInputEditText mEditText;
 
     private Spinner mSpinner;
-    private TextInputEditText mInputEditText;
+    private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
     private Button mSubmitButton;
     private RadioGroup mMultipleChoice;
     private CheckBox mMultipleAnswer;
@@ -37,6 +40,7 @@ public class QuizActivity extends AppCompatActivity {
     private int mCurrentIndex = 0;
     private boolean mAllAnswered = false;
     private double mScore = 0;
+    private String spinnerChoice;
 
     public QuizActivity() {
 
@@ -67,29 +71,29 @@ public class QuizActivity extends AppCompatActivity {
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                String text = parent.getSelectedItem().toString();
+                spinnerChoice = parent.getSelectedItem().toString();
 
-                if (text.equals("Select Option")) {
+                if (spinnerChoice.equals("Select Option")) {
                     mMultipleInput.setVisibility(View.GONE);
                     mTextShortAnswerLayout.setVisibility(View.GONE);
                     mSubmitButton.setVisibility(View.GONE);
                 }
-                else if (text.equals("Multiple Choice")) {
+                else if (spinnerChoice.equals("Multiple Choice")) {
                     mMultipleInput.setVisibility(View.VISIBLE);
                     mTextShortAnswerLayout.setVisibility(View.GONE);
                     mSubmitButton.setVisibility(View.VISIBLE);
                 }
-                else if(text.equals("True/False")) {
+                else if(spinnerChoice.equals("True/False")) {
                     mMultipleInput.setVisibility(View.GONE);
                     mTextShortAnswerLayout.setVisibility(View.GONE);
                     mSubmitButton.setVisibility(View.VISIBLE);
                 }
-                else if(text.equals("Multiple Answer Choices")) {
+                else if(spinnerChoice.equals("Multiple Answer Choices")) {
                     mMultipleInput.setVisibility(View.VISIBLE);
                     mTextShortAnswerLayout.setVisibility(View.GONE);
                     mSubmitButton.setVisibility(View.VISIBLE);
                 }
-                else if(text.equals("Short Answer")) {
+                else if(spinnerChoice.equals("Short Answer")) {
                     mMultipleInput.setVisibility(View.GONE);
                     mTextShortAnswerLayout.setVisibility(View.VISIBLE);
                     mSubmitButton.setVisibility(View.VISIBLE);
@@ -117,7 +121,8 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void afterTextChanged(Editable s) {
                 if (s.length() > mTextInputLayout.getCounterMaxLength())
-                    mTextInputLayout.setError("Max character length is " + mTextInputLayout.getCounterMaxLength());
+                    mTextInputLayout.setError("Max character length is " +
+                            mTextInputLayout.getCounterMaxLength());
                 else
                     mTextInputLayout.setError(null);
             }
@@ -133,8 +138,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = findViewById(R.id.edit_text_a);
-        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mEditTextA = findViewById(R.id.edit_text_a);
+        mEditTextA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -143,8 +148,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = findViewById(R.id.edit_text_b);
-        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mEditTextB = findViewById(R.id.edit_text_b);
+        mEditTextB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -153,8 +158,8 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = findViewById(R.id.edit_text_c);
-        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mEditTextC = findViewById(R.id.edit_text_c);
+        mEditTextC.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -163,12 +168,41 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mInputEditText = findViewById(R.id.edit_text_d);
-        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mEditTextD = findViewById(R.id.edit_text_d);
+        mEditTextD.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
                     hideKeyboard(v);
+                }
+            }
+        });
+
+        mShortAnswer = findViewById(R.id.short_answer_text);
+        mSubmitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if((spinnerChoice.equals("Multiple Choice") ||
+                        spinnerChoice.equals("Multiple Answer Choices")) &&
+                        ((mEditText.getText().toString().length() <= 0 ||
+                                mEditTextA.getText().toString().length() <=0 ||
+                                mEditTextB.getText().toString().length() <=0 ||
+                                mEditTextC.getText().toString().length() <=0 ||
+                                mEditTextD.getText().toString().length() <=0))) {
+                    Log.d("QuizActivity", "I am here");
+                }
+
+                else if((spinnerChoice.equals("True/False")) &&
+                        (mEditText.getText().toString().length() <= 0)) {
+                    Log.d("QuizActivity", spinnerChoice);
+                }
+                else if((spinnerChoice.equals("Short Answer")) &&
+                        ((mEditText.getText().toString().length() <= 0 ||
+                                mShortAnswer.getText().toString().length() <= 0))) {
+                    Log.d("QuizActivity", spinnerChoice);
+                }
+                else {
+                    Log.d("QuizActivity", "Submitted");
                 }
             }
         });
