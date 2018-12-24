@@ -13,8 +13,10 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -30,6 +32,8 @@ public class QuizActivity extends AppCompatActivity {
     private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
     private Button mSubmitButton;
     private EditText mShortAnswer;
+    private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
+    private RadioGroup mRadioGroup;
     private ImageButton mPrevButton, mNextButton;
 
     private int mCurrentIndex = 0;
@@ -204,30 +208,42 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mCheckBoxA = findViewById(R.id.check_a);
+        mCheckBoxB = findViewById(R.id.check_b);
+        mCheckBoxC = findViewById(R.id.check_c);
+        mCheckBoxD = findViewById(R.id.check_d);
+        mRadioGroup = findViewById(R.id.true_false_radio_group);
+
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if((spinnerChoice.equals("Multiple Choice") ||
                         spinnerChoice.equals("Multiple Answer Choices")) &&
-                        ((mEditText.getText().toString().length() <= 0 ||
-                                mEditTextA.getText().toString().length() <=0 ||
-                                mEditTextB.getText().toString().length() <=0 ||
-                                mEditTextC.getText().toString().length() <=0 ||
-                                mEditTextD.getText().toString().length() <=0))) {
-                    Log.d("QuizActivity", "I am here");
+                        ((mEditText.getText().toString().length() > 0 &&
+                                mEditTextA.getText().toString().length() > 0 &&
+                                mEditTextB.getText().toString().length() > 0 &&
+                                mEditTextC.getText().toString().length() > 0 &&
+                                mEditTextD.getText().toString().length() > 0))) {
+                    if(mCheckBoxA.isChecked() || mCheckBoxB.isChecked() || mCheckBoxC.isChecked()
+                            || mCheckBoxD.isChecked()) {
+                        Log.d("QuizActivity", spinnerChoice);
+                    }
+                    else if(mRadioGroup.getCheckedRadioButtonId() == 1) {
+                        Log.d("QuizActivity", spinnerChoice);
+                    }
                 }
 
                 else if((spinnerChoice.equals("True/False")) &&
-                        (mEditText.getText().toString().length() <= 0)) {
+                        (mEditText.getText().toString().length() > 0)) {
                     Log.d("QuizActivity", spinnerChoice);
                 }
                 else if((spinnerChoice.equals("Short Answer")) &&
-                        ((mEditText.getText().toString().length() <= 0 ||
-                                mShortAnswer.getText().toString().length() <= 0))) {
+                        ((mEditText.getText().toString().length() > 0 ||
+                                mShortAnswer.getText().toString().length() > 0))) {
                     Log.d("QuizActivity", spinnerChoice);
                 }
                 else {
-                    Log.d("QuizActivity", "Submitted");
+                    Log.d("QuizActivity", "Fill in all inputs!");
                 }
             }
         });
