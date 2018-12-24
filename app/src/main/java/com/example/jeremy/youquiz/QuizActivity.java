@@ -72,30 +72,32 @@ public class QuizActivity extends AppCompatActivity {
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerChoice = parent.getSelectedItem().toString();
 
-                if (spinnerChoice.equals("Select Option")) {
-                    mMultipleInput.setVisibility(View.GONE);
-                    mTextShortAnswerLayout.setVisibility(View.GONE);
-                    mSubmitButton.setVisibility(View.GONE);
-                }
-                else if (spinnerChoice.equals("Multiple Choice")) {
-                    mMultipleInput.setVisibility(View.VISIBLE);
-                    mTextShortAnswerLayout.setVisibility(View.GONE);
-                    mSubmitButton.setVisibility(View.VISIBLE);
-                }
-                else if(spinnerChoice.equals("True/False")) {
-                    mMultipleInput.setVisibility(View.GONE);
-                    mTextShortAnswerLayout.setVisibility(View.GONE);
-                    mSubmitButton.setVisibility(View.VISIBLE);
-                }
-                else if(spinnerChoice.equals("Multiple Answer Choices")) {
-                    mMultipleInput.setVisibility(View.VISIBLE);
-                    mTextShortAnswerLayout.setVisibility(View.GONE);
-                    mSubmitButton.setVisibility(View.VISIBLE);
-                }
-                else if(spinnerChoice.equals("Short Answer")) {
-                    mMultipleInput.setVisibility(View.GONE);
-                    mTextShortAnswerLayout.setVisibility(View.VISIBLE);
-                    mSubmitButton.setVisibility(View.VISIBLE);
+                switch (spinnerChoice) {
+                    case "Select Option":
+                        mMultipleInput.setVisibility(View.GONE);
+                        mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mSubmitButton.setVisibility(View.GONE);
+                        break;
+                    case "Multiple Choice":
+                        mMultipleInput.setVisibility(View.VISIBLE);
+                        mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mSubmitButton.setVisibility(View.VISIBLE);
+                        break;
+                    case "True/False":
+                        mMultipleInput.setVisibility(View.GONE);
+                        mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mSubmitButton.setVisibility(View.VISIBLE);
+                        break;
+                    case "Multiple Answer Choices":
+                        mMultipleInput.setVisibility(View.VISIBLE);
+                        mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mSubmitButton.setVisibility(View.VISIBLE);
+                        break;
+                    case "Short Answer":
+                        mMultipleInput.setVisibility(View.GONE);
+                        mTextShortAnswerLayout.setVisibility(View.VISIBLE);
+                        mSubmitButton.setVisibility(View.VISIBLE);
+                        break;
                 }
             }
 

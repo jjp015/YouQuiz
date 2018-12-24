@@ -57,7 +57,7 @@
             android:id="@+id/text_input_layout_a"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:hintTextAppearance="@style/HintTheme"
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="15"
@@ -76,7 +76,7 @@
             android:id="@+id/text_input_layout_b"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:hintTextAppearance="@style/HintTheme"
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="15"
@@ -95,7 +95,7 @@
             android:id="@+id/text_input_layout_c"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:hintTextAppearance="@style/HintTheme"
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="15"
@@ -115,7 +115,7 @@
             android:id="@+id/text_input_layout_d"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
+            app:hintTextAppearance="@style/HintTheme"
             app:errorEnabled="true"
             app:counterEnabled="true"
             app:counterMaxLength="15"
