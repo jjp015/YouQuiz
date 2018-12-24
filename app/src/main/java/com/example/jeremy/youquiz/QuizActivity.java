@@ -178,6 +178,15 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         mShortAnswer = findViewById(R.id.short_answer_text);
+        mShortAnswer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
