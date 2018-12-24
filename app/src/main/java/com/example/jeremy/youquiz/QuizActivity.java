@@ -13,10 +13,8 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
-import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -24,15 +22,13 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
-    private RelativeLayout mMultipleInput;
+    private RelativeLayout mMultipleInput, mMultiplCheck, mMultipleRadio, mTrueFalseRadio;
     private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
     private TextInputEditText mEditText;
 
     private Spinner mSpinner;
     private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
     private Button mSubmitButton;
-    private RadioGroup mMultipleChoice;
-    private CheckBox mMultipleAnswer;
     private EditText mShortAnswer;
     private ImageButton mPrevButton, mNextButton;
 
@@ -63,9 +59,13 @@ public class QuizActivity extends AppCompatActivity {
         // Apply the adapter to the spinner
         mSpinner.setAdapter(adapter);
 
+        mMultipleRadio = findViewById(R.id.multiple_radio);
+        mTrueFalseRadio = findViewById(R.id.true_false_radio);
+
         mSubmitButton = findViewById(R.id.submit_button);
         mMultipleInput = findViewById(R.id.multiple_input);
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
+        mMultiplCheck = findViewById(R.id.multiple_check);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -76,26 +76,41 @@ public class QuizActivity extends AppCompatActivity {
                     case "Select Option":
                         mMultipleInput.setVisibility(View.GONE);
                         mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mMultipleRadio.setVisibility(View.GONE);
+                        mTrueFalseRadio.setVisibility(View.GONE);
+                        mMultiplCheck.setVisibility(View.GONE);
                         mSubmitButton.setVisibility(View.GONE);
                         break;
                     case "Multiple Choice":
                         mMultipleInput.setVisibility(View.VISIBLE);
                         mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mMultipleRadio.setVisibility(View.VISIBLE);
+                        mTrueFalseRadio.setVisibility(View.GONE);
+                        mMultiplCheck.setVisibility(View.GONE);
                         mSubmitButton.setVisibility(View.VISIBLE);
                         break;
                     case "True/False":
                         mMultipleInput.setVisibility(View.GONE);
                         mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mMultipleRadio.setVisibility(View.GONE);
+                        mTrueFalseRadio.setVisibility(View.VISIBLE);
+                        mMultiplCheck.setVisibility(View.GONE);
                         mSubmitButton.setVisibility(View.VISIBLE);
                         break;
                     case "Multiple Answer Choices":
                         mMultipleInput.setVisibility(View.VISIBLE);
                         mTextShortAnswerLayout.setVisibility(View.GONE);
+                        mMultipleRadio.setVisibility(View.GONE);
+                        mTrueFalseRadio.setVisibility(View.GONE);
+                        mMultiplCheck.setVisibility(View.VISIBLE);
                         mSubmitButton.setVisibility(View.VISIBLE);
                         break;
                     case "Short Answer":
                         mMultipleInput.setVisibility(View.GONE);
                         mTextShortAnswerLayout.setVisibility(View.VISIBLE);
+                        mMultipleRadio.setVisibility(View.GONE);
+                        mTrueFalseRadio.setVisibility(View.GONE);
+                        mMultiplCheck.setVisibility(View.GONE);
                         mSubmitButton.setVisibility(View.VISIBLE);
                         break;
                 }
