@@ -24,16 +24,17 @@ import android.widget.Toast;
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
-    private RelativeLayout mMultipleInput, mMultiplCheck, mMultipleRadio, mTrueFalseRadio;
+    private RelativeLayout mMultipleInput, mMultiplCheck, mMultipleRadio, mTrueFalseRadio,
+            mButtonGroup;
     private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
     private TextInputEditText mEditText;
 
     private Spinner mSpinner;
     private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
-    private Button mSubmitButton;
+    private Button mSubmitButton, mClearButton;
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
-    private RadioGroup mRadioGroup;
+    private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
     private ImageButton mPrevButton, mNextButton;
 
     private int mCurrentIndex = 0;
@@ -65,8 +66,7 @@ public class QuizActivity extends AppCompatActivity {
 
         mMultipleRadio = findViewById(R.id.multiple_radio);
         mTrueFalseRadio = findViewById(R.id.true_false_radio);
-
-        mSubmitButton = findViewById(R.id.submit_button);
+        mButtonGroup = findViewById(R.id.button_group);
         mMultipleInput = findViewById(R.id.multiple_input);
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
         mMultiplCheck = findViewById(R.id.multiple_check);
@@ -83,7 +83,7 @@ public class QuizActivity extends AppCompatActivity {
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
-                        mSubmitButton.setVisibility(View.GONE);
+                        mButtonGroup.setVisibility(View.GONE);
                         break;
                     case "Multiple Choice":
                         mMultipleInput.setVisibility(View.VISIBLE);
@@ -91,7 +91,7 @@ public class QuizActivity extends AppCompatActivity {
                         mMultipleRadio.setVisibility(View.VISIBLE);
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
-                        mSubmitButton.setVisibility(View.VISIBLE);
+                        mButtonGroup.setVisibility(View.VISIBLE);
                         break;
                     case "True/False":
                         mMultipleInput.setVisibility(View.GONE);
@@ -99,7 +99,7 @@ public class QuizActivity extends AppCompatActivity {
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.VISIBLE);
                         mMultiplCheck.setVisibility(View.GONE);
-                        mSubmitButton.setVisibility(View.VISIBLE);
+                        mButtonGroup.setVisibility(View.VISIBLE);
                         break;
                     case "Multiple Answer Choices":
                         mMultipleInput.setVisibility(View.VISIBLE);
@@ -107,7 +107,7 @@ public class QuizActivity extends AppCompatActivity {
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.VISIBLE);
-                        mSubmitButton.setVisibility(View.VISIBLE);
+                        mButtonGroup.setVisibility(View.VISIBLE);
                         break;
                     case "Short Answer":
                         mMultipleInput.setVisibility(View.GONE);
@@ -115,7 +115,7 @@ public class QuizActivity extends AppCompatActivity {
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
-                        mSubmitButton.setVisibility(View.VISIBLE);
+                        mButtonGroup.setVisibility(View.VISIBLE);
                         break;
                 }
             }
@@ -128,7 +128,6 @@ public class QuizActivity extends AppCompatActivity {
 
         mTextInputLayout = findViewById(R.id.text_input_layout);
         mEditText = findViewById(R.id.edit_text);
-
         mEditText.addTextChangedListener(new TextWatcher() {
             @Override
             public void beforeTextChanged(CharSequence s, int start, int count, int after) {
@@ -208,11 +207,32 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mMultipleRadio.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
+        mTrueFalseRadio.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+            @Override
+            public void onFocusChange(View v, boolean hasFocus) {
+                if (!hasFocus) {
+                    hideKeyboard(v);
+                }
+            }
+        });
+
         mCheckBoxA = findViewById(R.id.check_a);
         mCheckBoxB = findViewById(R.id.check_b);
         mCheckBoxC = findViewById(R.id.check_c);
         mCheckBoxD = findViewById(R.id.check_d);
-        mRadioGroup = findViewById(R.id.true_false_radio_group);
+        mRadioGroupMultiple = findViewById(R.id.multiple_radio_group);
+        mRadioGroupTrueFalse = findViewById(R.id.true_false_radio_group);
+        mSubmitButton = findViewById(R.id.submit_button);
+        mClearButton = findViewById(R.id.clear_button);
 
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -228,29 +248,57 @@ public class QuizActivity extends AppCompatActivity {
                             || mCheckBoxD.isChecked()) {
                         Log.d("QuizActivity", spinnerChoice);
                     }
-                    else if(mRadioGroup.getCheckedRadioButtonId() == 1) {
+                    else if(!(mRadioGroupMultiple.getCheckedRadioButtonId() == -1)) {
                         Log.d("QuizActivity", spinnerChoice);
                     }
+                    clearForm();
                 }
 
                 else if((spinnerChoice.equals("True/False")) &&
                         (mEditText.getText().toString().length() > 0)) {
                     Log.d("QuizActivity", spinnerChoice);
+                    clearForm();
                 }
                 else if((spinnerChoice.equals("Short Answer")) &&
                         ((mEditText.getText().toString().length() > 0 ||
                                 mShortAnswer.getText().toString().length() > 0))) {
                     Log.d("QuizActivity", spinnerChoice);
+                    clearForm();
                 }
                 else {
                     Log.d("QuizActivity", "Fill in all inputs!");
                 }
             }
         });
+
+        mClearButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                clearForm();
+            }
+        });
     }
 
     public void hideKeyboard(View view) {
-        InputMethodManager inputMethodManager =(InputMethodManager)getSystemService(QuizActivity.INPUT_METHOD_SERVICE);
-        inputMethodManager.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        InputMethodManager imm =
+                (InputMethodManager)getSystemService(QuizActivity.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
+        view.clearFocus();
+    }
+
+    public void clearForm() {
+        mEditText.setText("");
+        mEditText.setText("");
+        mEditTextA.setText("");
+        mEditTextB.setText("");
+        mEditTextC.setText("");
+        mEditTextD.setText("");
+        mShortAnswer.setText("");
+        mCheckBoxA.setChecked(false);
+        mCheckBoxB.setChecked(false);
+        mCheckBoxC.setChecked(false);
+        mCheckBoxD.setChecked(false);
+        mRadioGroupMultiple.clearCheck();
+        mRadioGroupTrueFalse.clearCheck();
     }
 }

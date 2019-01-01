@@ -158,7 +158,8 @@
         android:visibility="gone">
         <RadioGroup
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:id="@+id/multiple_radio_group">
             <RadioButton
                 android:id="@+id/radio_a"
                 android:layout_width="fill_parent"
@@ -245,12 +246,23 @@
                 android:layout_toEndOf="@id/check_c"/>
     </RelativeLayout>
 
-    <Button
-        android:id="@+id/submit_button"
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/button_group"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit_button"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
-
+        android:gravity="center"
+        android:visibility="gone">
+        <Button
+            android:id="@+id/clear_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/clear_button"/>
+        <Button
+            android:id="@+id/submit_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_button"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/clear_button"/>
+    </RelativeLayout>
 </LinearLayout>
