@@ -69,7 +69,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/option_a"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:nextFocusDown="@id/edit_text_b"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -88,7 +89,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/option_b"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:nextFocusDown="@id/edit_text_c"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
@@ -108,7 +110,8 @@
                 android:layout_height="wrap_content"
                 android:gravity="center"
                 android:hint="@string/option_c"
-                android:inputType="textCapSentences" />
+                android:inputType="textCapSentences"
+                android:nextFocusDown="@id/edit_text_d"/>
         </android.support.design.widget.TextInputLayout>
 
         <android.support.design.widget.TextInputLayout
