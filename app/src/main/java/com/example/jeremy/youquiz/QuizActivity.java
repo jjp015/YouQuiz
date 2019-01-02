@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
+
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
@@ -250,8 +251,17 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
                                 radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
-                                if (!(radioMultipleButtonID == -1)) {
-                                    Log.d("QuizActivity", spinnerChoice + radioMultipleButtonID);
+                                if(radioMultipleButtonID == 2131296392) {
+                                    Log.d("QuizActivity", "A");
+                                    clearForm();
+                                } else if(radioMultipleButtonID == 2131296393) {
+                                    Log.d("QuizActivity", "B");
+                                    clearForm();
+                                } else if(radioMultipleButtonID == 2131296394) {
+                                    Log.d("QuizActivity", "C");
+                                    clearForm();
+                                } else if(radioMultipleButtonID == 2131296395) {
+                                    Log.d("QuizActivity", "D");
                                     clearForm();
                                 } else {
                                     Log.d("QuizActivity", "Select answer choice!" +
@@ -266,8 +276,16 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextB.getText().toString().length() > 0 &&
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
-                                if (mCheckBoxA.isChecked() || mCheckBoxB.isChecked() ||
-                                        mCheckBoxC.isChecked() || mCheckBoxD.isChecked()) {
+                                if (mCheckBoxA.isChecked()) {
+                                    Log.d("QuizActivity", spinnerChoice);
+                                    clearForm();
+                                } if (mCheckBoxB.isChecked()) {
+                                    Log.d("QuizActivity", spinnerChoice);
+                                    clearForm();
+                                } if (mCheckBoxC.isChecked()) {
+                                    Log.d("QuizActivity", spinnerChoice);
+                                    clearForm();
+                                } if (mCheckBoxD.isChecked()) {
                                     Log.d("QuizActivity", spinnerChoice);
                                     clearForm();
                                 } else {
@@ -279,9 +297,12 @@ public class QuizActivity extends AppCompatActivity {
                             break;
                         case "True/False":
                             radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
-                            if (!(radioTrueFalseButtonID == -1)) {
-                                Log.d("QuizActivity", spinnerChoice + radioTrueFalseButtonID);
+                            if (radioTrueFalseButtonID == 2131296397) {
+                                Log.d("QuizActivity", "True");
                                 clearForm();
+                            } else if (radioTrueFalseButtonID == 2131296396) {
+                            Log.d("QuizActivity", "False");
+                            clearForm();
                             } else {
                                 Log.d("QuizActivity", "Select answer choice!");
                             }
