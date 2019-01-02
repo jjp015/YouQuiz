@@ -44,7 +44,7 @@ public class QuizActivity extends AppCompatActivity {
     private int radioMultipleButtonID, radioTrueFalseButtonID;
     private boolean mAllAnswered = false;
     private double mScore = 0;
-    private String spinnerChoice;
+    private String spinnerChoice, questionText;
 
     ArrayList<String>question = new ArrayList<>();
     ArrayList<String>answer = new ArrayList<>();
@@ -245,8 +245,9 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
+                questionText = mEditTextA.getText().toString();
                 Toast toast = Toast.makeText(context, "Enter in a question!", Toast.LENGTH_SHORT);
-                if(mEditText.getText().toString().length() > 0) {
+                if(questionText.length() > 0) {
                     switch (spinnerChoice) {
                         case "Multiple Choice":
                             if (mEditTextA.getText().toString().length() > 0 &&
@@ -256,28 +257,21 @@ public class QuizActivity extends AppCompatActivity {
                                 radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
                                 if(radioMultipleButtonID == 2131296392) {
                                     toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", "A");
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296393) {
                                     toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", "B");
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296394) {
                                     toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", "C");
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296395) {
                                     toast = Toast.makeText(context, "D", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", "D");
                                     clearForm();
                                 } else {
                                     toast = Toast.makeText(context, "Select answer choice!", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", "Select answer choice!" +
-                                            radioMultipleButtonID);
                                 }
                             } else {
                                 toast = Toast.makeText(context, "Fill in answer choices!", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", "Fill in answer choices!");
                             }
                             toast.show();
                             break;
@@ -289,15 +283,12 @@ public class QuizActivity extends AppCompatActivity {
                                 if (mCheckBoxA.isChecked() || mCheckBoxB.isChecked() ||
                                         mCheckBoxC.isChecked() || mCheckBoxD.isChecked()) {
                                     toast = Toast.makeText(context, "Selected", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", spinnerChoice);
                                     clearForm();
                                 } else {
                                     toast = Toast.makeText(context, "Select answer choice(s)!", Toast.LENGTH_SHORT);
-                                    Log.d("QuizActivity", "Select answer choice(s)!");
                                 }
                             } else {
                                 toast = Toast.makeText(context, "Fill in answer choices!", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", "Fill in answer choices!");
                             }
                             toast.show();
                             break;
@@ -305,33 +296,27 @@ public class QuizActivity extends AppCompatActivity {
                             radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
                             if (radioTrueFalseButtonID == 2131296397) {
                                 toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", "True");
                                 clearForm();
                             } else if (radioTrueFalseButtonID == 2131296396) {
                                 toast = Toast.makeText(context, "False", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", "False");
                                 clearForm();
                             } else {
                                 toast = Toast.makeText(context, "Select answer choice!", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", "Select answer choice!");
                             }
                             toast.show();
                             break;
                         case "Short Answer":
                             if (mShortAnswer.getText().toString().length() > 0) {
                                 toast = Toast.makeText(context, "Short answer", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", spinnerChoice);
                                 clearForm();
                             } else {
                                 toast = Toast.makeText(context, "Fill in short answer!", Toast.LENGTH_SHORT);
-                                Log.d("QuizActivity", "Fill in short answer!");
                             }
                             toast.show();
                             break;
                     }
                 } else {
                     toast.show();
-                    Log.d("QuizActivity", "Enter in a question!");
                 }
             }
         });
