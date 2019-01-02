@@ -21,6 +21,8 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+
 public class QuizActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
 
@@ -28,7 +30,6 @@ public class QuizActivity extends AppCompatActivity {
             mButtonGroup;
     private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
     private TextInputEditText mEditText;
-
     private Spinner mSpinner;
     private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
     private Button mSubmitButton, mClearButton;
@@ -38,9 +39,13 @@ public class QuizActivity extends AppCompatActivity {
     private ImageButton mPrevButton, mNextButton;
 
     private int mCurrentIndex = 0;
+    private int radioMultipleButtonID, radioTrueFalseButtonID;
     private boolean mAllAnswered = false;
     private double mScore = 0;
     private String spinnerChoice;
+
+    ArrayList<String>question = new ArrayList<>();
+    ArrayList<String>answer = new ArrayList<>();
 
     public QuizActivity() {
 
@@ -237,36 +242,61 @@ public class QuizActivity extends AppCompatActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if((spinnerChoice.equals("Multiple Choice") ||
-                        spinnerChoice.equals("Multiple Answer Choices")) &&
-                        ((mEditText.getText().toString().length() > 0 &&
-                                mEditTextA.getText().toString().length() > 0 &&
-                                mEditTextB.getText().toString().length() > 0 &&
-                                mEditTextC.getText().toString().length() > 0 &&
-                                mEditTextD.getText().toString().length() > 0))) {
-                    if(mCheckBoxA.isChecked() || mCheckBoxB.isChecked() || mCheckBoxC.isChecked()
-                            || mCheckBoxD.isChecked()) {
-                        Log.d("QuizActivity", spinnerChoice);
+                if(mEditText.getText().toString().length() > 0) {
+                    switch (spinnerChoice) {
+                        case "Multiple Choice":
+                            if (mEditTextA.getText().toString().length() > 0 &&
+                                    mEditTextB.getText().toString().length() > 0 &&
+                                    mEditTextC.getText().toString().length() > 0 &&
+                                    mEditTextD.getText().toString().length() > 0) {
+                                radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
+                                if (!(radioMultipleButtonID == -1)) {
+                                    Log.d("QuizActivity", spinnerChoice + radioMultipleButtonID);
+                                    clearForm();
+                                } else {
+                                    Log.d("QuizActivity", "Select answer choice!" +
+                                            radioMultipleButtonID);
+                                }
+                            } else {
+                                Log.d("QuizActivity", "Fill in answer choices!");
+                            }
+                            break;
+                        case "Multiple Answer Choices":
+                            if (mEditTextA.getText().toString().length() > 0 &&
+                                    mEditTextB.getText().toString().length() > 0 &&
+                                    mEditTextC.getText().toString().length() > 0 &&
+                                    mEditTextD.getText().toString().length() > 0) {
+                                if (mCheckBoxA.isChecked() || mCheckBoxB.isChecked() ||
+                                        mCheckBoxC.isChecked() || mCheckBoxD.isChecked()) {
+                                    Log.d("QuizActivity", spinnerChoice);
+                                    clearForm();
+                                } else {
+                                    Log.d("QuizActivity", "Select answer choice(s)!");
+                                }
+                            } else {
+                                Log.d("QuizActivity", "Fill in answer choices!");
+                            }
+                            break;
+                        case "True/False":
+                            radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
+                            if (!(radioTrueFalseButtonID == -1)) {
+                                Log.d("QuizActivity", spinnerChoice + radioTrueFalseButtonID);
+                                clearForm();
+                            } else {
+                                Log.d("QuizActivity", "Select answer choice!");
+                            }
+                            break;
+                        case "Short Answer":
+                            if (mShortAnswer.getText().toString().length() > 0) {
+                                Log.d("QuizActivity", spinnerChoice);
+                                clearForm();
+                            } else {
+                                Log.d("QuizActivity", "Fill in short answer!");
+                            }
+                            break;
                     }
-                    else if(!(mRadioGroupMultiple.getCheckedRadioButtonId() == -1)) {
-                        Log.d("QuizActivity", spinnerChoice);
-                    }
-                    clearForm();
-                }
-
-                else if((spinnerChoice.equals("True/False")) &&
-                        (mEditText.getText().toString().length() > 0)) {
-                    Log.d("QuizActivity", spinnerChoice);
-                    clearForm();
-                }
-                else if((spinnerChoice.equals("Short Answer")) &&
-                        ((mEditText.getText().toString().length() > 0 ||
-                                mShortAnswer.getText().toString().length() > 0))) {
-                    Log.d("QuizActivity", spinnerChoice);
-                    clearForm();
-                }
-                else {
-                    Log.d("QuizActivity", "Fill in all inputs!");
+                } else {
+                    Log.d("QuizActivity", "Enter in a question!");
                 }
             }
         });
