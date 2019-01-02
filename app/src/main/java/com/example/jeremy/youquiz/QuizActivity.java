@@ -1,6 +1,7 @@
 package com.example.jeremy.youquiz;
 
 import android.annotation.SuppressLint;
+import android.content.Context;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -243,6 +244,8 @@ public class QuizActivity extends AppCompatActivity {
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                Context context = getApplicationContext();
+                Toast toast = Toast.makeText(context, "Enter in a question!", Toast.LENGTH_SHORT);
                 if(mEditText.getText().toString().length() > 0) {
                     switch (spinnerChoice) {
                         case "Multiple Choice":
@@ -252,71 +255,82 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextD.getText().toString().length() > 0) {
                                 radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
                                 if(radioMultipleButtonID == 2131296392) {
+                                    toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", "A");
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296393) {
+                                    toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", "B");
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296394) {
+                                    toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", "C");
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296395) {
+                                    toast = Toast.makeText(context, "D", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", "D");
                                     clearForm();
                                 } else {
+                                    toast = Toast.makeText(context, "Select answer choice!", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", "Select answer choice!" +
                                             radioMultipleButtonID);
                                 }
                             } else {
+                                toast = Toast.makeText(context, "Fill in answer choices!", Toast.LENGTH_SHORT);
                                 Log.d("QuizActivity", "Fill in answer choices!");
                             }
+                            toast.show();
                             break;
                         case "Multiple Answer Choices":
                             if (mEditTextA.getText().toString().length() > 0 &&
                                     mEditTextB.getText().toString().length() > 0 &&
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
-                                if (mCheckBoxA.isChecked()) {
-                                    Log.d("QuizActivity", spinnerChoice);
-                                    clearForm();
-                                } if (mCheckBoxB.isChecked()) {
-                                    Log.d("QuizActivity", spinnerChoice);
-                                    clearForm();
-                                } if (mCheckBoxC.isChecked()) {
-                                    Log.d("QuizActivity", spinnerChoice);
-                                    clearForm();
-                                } if (mCheckBoxD.isChecked()) {
+                                if (mCheckBoxA.isChecked() || mCheckBoxB.isChecked() ||
+                                        mCheckBoxC.isChecked() || mCheckBoxD.isChecked()) {
+                                    toast = Toast.makeText(context, "Selected", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", spinnerChoice);
                                     clearForm();
                                 } else {
+                                    toast = Toast.makeText(context, "Select answer choice(s)!", Toast.LENGTH_SHORT);
                                     Log.d("QuizActivity", "Select answer choice(s)!");
                                 }
                             } else {
+                                toast = Toast.makeText(context, "Fill in answer choices!", Toast.LENGTH_SHORT);
                                 Log.d("QuizActivity", "Fill in answer choices!");
                             }
+                            toast.show();
                             break;
                         case "True/False":
                             radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
                             if (radioTrueFalseButtonID == 2131296397) {
+                                toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
                                 Log.d("QuizActivity", "True");
                                 clearForm();
                             } else if (radioTrueFalseButtonID == 2131296396) {
-                            Log.d("QuizActivity", "False");
-                            clearForm();
+                                toast = Toast.makeText(context, "False", Toast.LENGTH_SHORT);
+                                Log.d("QuizActivity", "False");
+                                clearForm();
                             } else {
+                                toast = Toast.makeText(context, "Select answer choice!", Toast.LENGTH_SHORT);
                                 Log.d("QuizActivity", "Select answer choice!");
                             }
+                            toast.show();
                             break;
                         case "Short Answer":
                             if (mShortAnswer.getText().toString().length() > 0) {
+                                toast = Toast.makeText(context, "Short answer", Toast.LENGTH_SHORT);
                                 Log.d("QuizActivity", spinnerChoice);
                                 clearForm();
                             } else {
+                                toast = Toast.makeText(context, "Fill in short answer!", Toast.LENGTH_SHORT);
                                 Log.d("QuizActivity", "Fill in short answer!");
                             }
+                            toast.show();
                             break;
                     }
                 } else {
+                    toast.show();
                     Log.d("QuizActivity", "Enter in a question!");
                 }
             }
