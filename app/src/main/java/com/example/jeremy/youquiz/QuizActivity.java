@@ -2,6 +2,7 @@ package com.example.jeremy.youquiz;
 
 import android.annotation.SuppressLint;
 import android.content.Context;
+import android.content.Intent;
 import android.support.design.widget.TextInputEditText;
 import android.support.design.widget.TextInputLayout;
 import android.support.v7.app.AppCompatActivity;
@@ -26,8 +27,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity {
-    private static final String KEY_INDEX = "index";
-
     private RelativeLayout mMultipleInput, mMultiplCheck, mMultipleRadio, mTrueFalseRadio,
             mButtonGroup;
     private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
@@ -40,7 +39,6 @@ public class QuizActivity extends AppCompatActivity {
     private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
     private ImageButton mPrevButton, mNextButton;
 
-    private int mCurrentIndex = 0;
     private int radioMultipleButtonID, radioTrueFalseButtonID;
     private boolean mAllAnswered = false;
     private double mScore = 0;
@@ -58,9 +56,6 @@ public class QuizActivity extends AppCompatActivity {
     @SuppressLint("CutPasteId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        if (savedInstanceState != null)
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
 
@@ -373,6 +368,18 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 clearForm();
+            }
+        });
+
+        mCompleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if(question.isEmpty()) {
+                    Context context = getApplicationContext();
+                    Toast toast = Toast.makeText(context, "Quiz is empty!", Toast.LENGTH_SHORT);
+                    toast.show();
+                } else
+                    startActivity(new Intent(QuizActivity.this, DisplayActivity.class));
             }
         });
     }
