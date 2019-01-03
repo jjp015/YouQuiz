@@ -268,4 +268,12 @@
             android:layout_gravity="center"
             android:layout_toEndOf="@id/clear_button"/>
     </RelativeLayout>
+
+    <Button
+        android:id="@+id/complete_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/complete_button"
+        android:layout_gravity="center"
+        android:visibility="gone"/>
 </LinearLayout>

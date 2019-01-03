@@ -34,7 +34,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextInputEditText mEditText;
     private Spinner mSpinner;
     private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
-    private Button mSubmitButton, mClearButton;
+    private Button mSubmitButton, mClearButton, mCompleteButton;
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
     private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
@@ -44,7 +44,8 @@ public class QuizActivity extends AppCompatActivity {
     private int radioMultipleButtonID, radioTrueFalseButtonID;
     private boolean mAllAnswered = false;
     private double mScore = 0;
-    private String spinnerChoice, questionText, answerList, shortAnswerText;
+    private String spinnerChoice, questionText, shortAnswerText;
+    private String answerList = "";
 
     ArrayList<String>question = new ArrayList<>();
     ArrayList<String>answer = new ArrayList<>();
@@ -75,6 +76,7 @@ public class QuizActivity extends AppCompatActivity {
         mMultipleRadio = findViewById(R.id.multiple_radio);
         mTrueFalseRadio = findViewById(R.id.true_false_radio);
         mButtonGroup = findViewById(R.id.button_group);
+        mCompleteButton= findViewById(R.id.complete_button);
         mMultipleInput = findViewById(R.id.multiple_input);
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
         mMultiplCheck = findViewById(R.id.multiple_check);
@@ -92,6 +94,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.GONE);
+                        mCompleteButton.setVisibility(View.GONE);
                         break;
                     case "Multiple Choice":
                         mMultipleInput.setVisibility(View.VISIBLE);
@@ -100,6 +103,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
+                        mCompleteButton.setVisibility(View.VISIBLE);
                         break;
                     case "True/False":
                         mMultipleInput.setVisibility(View.GONE);
@@ -108,6 +112,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.VISIBLE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
+                        mCompleteButton.setVisibility(View.VISIBLE);
                         break;
                     case "Multiple Answer Choices":
                         mMultipleInput.setVisibility(View.VISIBLE);
@@ -116,6 +121,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.VISIBLE);
                         mButtonGroup.setVisibility(View.VISIBLE);
+                        mCompleteButton.setVisibility(View.VISIBLE);
                         break;
                     case "Short Answer":
                         mMultipleInput.setVisibility(View.GONE);
@@ -124,6 +130,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
+                        mCompleteButton.setVisibility(View.VISIBLE);
                         break;
                 }
             }
@@ -156,7 +163,12 @@ public class QuizActivity extends AppCompatActivity {
         });
 
         mInputEditText = findViewById(R.id.edit_text);
-        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mEditTextA = findViewById(R.id.edit_text_a);
+        mEditTextB = findViewById(R.id.edit_text_b);
+        mEditTextC = findViewById(R.id.edit_text_c);
+        mEditTextD = findViewById(R.id.edit_text_d);
+        mShortAnswer = findViewById(R.id.short_answer_text);
+    /*    mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -165,7 +177,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mEditTextA = findViewById(R.id.edit_text_a);
         mEditTextA.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -175,7 +186,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mEditTextB = findViewById(R.id.edit_text_b);
         mEditTextB.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -185,7 +195,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mEditTextC = findViewById(R.id.edit_text_c);
         mEditTextC.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -195,7 +204,6 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mEditTextD = findViewById(R.id.edit_text_d);
         mEditTextD.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -205,7 +213,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mShortAnswer = findViewById(R.id.short_answer_text);
+
         mShortAnswer.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
@@ -232,6 +240,7 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
+        */
 
         mCheckBoxA = findViewById(R.id.check_a);
         mCheckBoxB = findViewById(R.id.check_b);
@@ -256,25 +265,25 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
                                 radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
-                                if(radioMultipleButtonID == 2131296392) {
+                                if(radioMultipleButtonID == 2131296393) {
                                     question.add(questionText);
                                     answer.add("A");
                                     type.add(0);
                                     toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
                                     clearForm();
-                                } else if(radioMultipleButtonID == 2131296393) {
+                                } else if(radioMultipleButtonID == 2131296394) {
                                     question.add(questionText);
                                     answer.add("B");
                                     type.add(0);
                                     toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
                                     clearForm();
-                                } else if(radioMultipleButtonID == 2131296394) {
+                                } else if(radioMultipleButtonID == 2131296395) {
                                     question.add(questionText);
                                     answer.add("C");
                                     type.add(0);
                                     toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
                                     clearForm();
-                                } else if(radioMultipleButtonID == 2131296395) {
+                                } else if(radioMultipleButtonID == 2131296396) {
                                     question.add(questionText);
                                     answer.add("D");
                                     type.add(0);
@@ -298,13 +307,13 @@ public class QuizActivity extends AppCompatActivity {
                                     if(mCheckBoxA.isChecked()) {
                                         answerList = answerList + "A";
                                     }
-                                    if(mCheckBoxA.isChecked()) {
+                                    if(mCheckBoxB.isChecked()) {
                                         answerList = answerList + "B";
                                     }
-                                    if(mCheckBoxA.isChecked()) {
+                                    if(mCheckBoxC.isChecked()) {
                                         answerList = answerList + "C";
                                     }
-                                    if(mCheckBoxA.isChecked()) {
+                                    if(mCheckBoxD.isChecked()) {
                                         answerList = answerList + "D";
                                     }
                                     question.add(questionText);
@@ -312,6 +321,7 @@ public class QuizActivity extends AppCompatActivity {
                                     type.add(1);
                                     toast = Toast.makeText(context, answerList, Toast.LENGTH_SHORT);
                                     clearForm();
+                                    answerList = "";
                                 } else {
                                     toast = Toast.makeText(context, "Select answer choice(s)!", Toast.LENGTH_SHORT);
                                 }
@@ -322,13 +332,13 @@ public class QuizActivity extends AppCompatActivity {
                             break;
                         case "True/False":
                             radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
-                            if (radioTrueFalseButtonID == 2131296397) {
+                            if (radioTrueFalseButtonID == 2131296398) {
                                 question.add(questionText);
                                 answer.add("True");
                                 type.add(2);
                                 toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
                                 clearForm();
-                            } else if (radioTrueFalseButtonID == 2131296396) {
+                            } else if (radioTrueFalseButtonID == 2131296397) {
                                 question.add(questionText);
                                 answer.add("False");
                                 type.add(2);
