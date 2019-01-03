@@ -44,10 +44,11 @@ public class QuizActivity extends AppCompatActivity {
     private int radioMultipleButtonID, radioTrueFalseButtonID;
     private boolean mAllAnswered = false;
     private double mScore = 0;
-    private String spinnerChoice, questionText;
+    private String spinnerChoice, questionText, answerList, shortAnswerText;
 
     ArrayList<String>question = new ArrayList<>();
     ArrayList<String>answer = new ArrayList<>();
+    ArrayList<Integer>type = new ArrayList<>();
 
     public QuizActivity() {
 
@@ -245,7 +246,7 @@ public class QuizActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Context context = getApplicationContext();
-                questionText = mEditTextA.getText().toString();
+                questionText = mEditText.getText().toString();
                 Toast toast = Toast.makeText(context, "Enter in a question!", Toast.LENGTH_SHORT);
                 if(questionText.length() > 0) {
                     switch (spinnerChoice) {
@@ -256,15 +257,27 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextD.getText().toString().length() > 0) {
                                 radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
                                 if(radioMultipleButtonID == 2131296392) {
+                                    question.add(questionText);
+                                    answer.add("A");
+                                    type.add(0);
                                     toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296393) {
+                                    question.add(questionText);
+                                    answer.add("B");
+                                    type.add(0);
                                     toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296394) {
+                                    question.add(questionText);
+                                    answer.add("C");
+                                    type.add(0);
                                     toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(radioMultipleButtonID == 2131296395) {
+                                    question.add(questionText);
+                                    answer.add("D");
+                                    type.add(0);
                                     toast = Toast.makeText(context, "D", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else {
@@ -282,7 +295,22 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextD.getText().toString().length() > 0) {
                                 if (mCheckBoxA.isChecked() || mCheckBoxB.isChecked() ||
                                         mCheckBoxC.isChecked() || mCheckBoxD.isChecked()) {
-                                    toast = Toast.makeText(context, "Selected", Toast.LENGTH_SHORT);
+                                    if(mCheckBoxA.isChecked()) {
+                                        answerList = answerList + "A";
+                                    }
+                                    if(mCheckBoxA.isChecked()) {
+                                        answerList = answerList + "B";
+                                    }
+                                    if(mCheckBoxA.isChecked()) {
+                                        answerList = answerList + "C";
+                                    }
+                                    if(mCheckBoxA.isChecked()) {
+                                        answerList = answerList + "D";
+                                    }
+                                    question.add(questionText);
+                                    answer.add(answerList);
+                                    type.add(1);
+                                    toast = Toast.makeText(context, answerList, Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else {
                                     toast = Toast.makeText(context, "Select answer choice(s)!", Toast.LENGTH_SHORT);
@@ -295,9 +323,15 @@ public class QuizActivity extends AppCompatActivity {
                         case "True/False":
                             radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
                             if (radioTrueFalseButtonID == 2131296397) {
+                                question.add(questionText);
+                                answer.add("True");
+                                type.add(2);
                                 toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else if (radioTrueFalseButtonID == 2131296396) {
+                                question.add(questionText);
+                                answer.add("False");
+                                type.add(2);
                                 toast = Toast.makeText(context, "False", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
@@ -306,7 +340,11 @@ public class QuizActivity extends AppCompatActivity {
                             toast.show();
                             break;
                         case "Short Answer":
-                            if (mShortAnswer.getText().toString().length() > 0) {
+                            shortAnswerText = mShortAnswer.getText().toString();
+                            if (shortAnswerText.length() > 0) {
+                                question.add(questionText);
+                                answer.add(shortAnswerText);
+                                type.add(3);
                                 toast = Toast.makeText(context, "Short answer", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
