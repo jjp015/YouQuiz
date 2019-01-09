@@ -19,6 +19,7 @@ import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
@@ -37,9 +38,9 @@ public class QuizActivity extends AppCompatActivity {
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
     private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
+    private RadioButton mRadioA, mRadioB, mRadioC, mRadioD, mRadioTrue, mRadioFalse;
     private ImageButton mPrevButton, mNextButton;
 
-    private int radioMultipleButtonID, radioTrueFalseButtonID;
     private boolean mAllAnswered = false;
     private double mScore = 0;
     private String spinnerChoice, questionText, shortAnswerText;
@@ -71,6 +72,12 @@ public class QuizActivity extends AppCompatActivity {
         mMultipleRadio = findViewById(R.id.multiple_radio);
         mTrueFalseRadio = findViewById(R.id.true_false_radio);
         mButtonGroup = findViewById(R.id.button_group);
+        mRadioA = findViewById(R.id.radio_a);
+        mRadioB = findViewById(R.id.radio_b);
+        mRadioC = findViewById(R.id.radio_c);
+        mRadioD = findViewById(R.id.radio_d);
+        mRadioTrue = findViewById(R.id.radio_true);
+        mRadioFalse = findViewById(R.id.radio_false);
         mCompleteButton= findViewById(R.id.complete_button);
         mMultipleInput = findViewById(R.id.multiple_input);
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
@@ -259,26 +266,25 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextB.getText().toString().length() > 0 &&
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
-                                radioMultipleButtonID = mRadioGroupMultiple.getCheckedRadioButtonId();
-                                if(radioMultipleButtonID == 2131296393) {
+                                if(mRadioA.isChecked()) {
                                     question.add(questionText);
                                     answer.add("A");
                                     type.add(0);
                                     toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
                                     clearForm();
-                                } else if(radioMultipleButtonID == 2131296394) {
+                                } else if(mRadioB.isChecked()) {
                                     question.add(questionText);
                                     answer.add("B");
                                     type.add(0);
                                     toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
                                     clearForm();
-                                } else if(radioMultipleButtonID == 2131296395) {
+                                } else if(mRadioC.isChecked()) {
                                     question.add(questionText);
                                     answer.add("C");
                                     type.add(0);
                                     toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
                                     clearForm();
-                                } else if(radioMultipleButtonID == 2131296396) {
+                                } else if(mRadioD.isChecked()) {
                                     question.add(questionText);
                                     answer.add("D");
                                     type.add(0);
@@ -326,14 +332,13 @@ public class QuizActivity extends AppCompatActivity {
                             toast.show();
                             break;
                         case "True/False":
-                            radioTrueFalseButtonID = mRadioGroupTrueFalse.getCheckedRadioButtonId();
-                            if (radioTrueFalseButtonID == 2131296398) {
+                            if (mRadioTrue.isChecked()) {
                                 question.add(questionText);
                                 answer.add("True");
                                 type.add(2);
                                 toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
                                 clearForm();
-                            } else if (radioTrueFalseButtonID == 2131296397) {
+                            } else if (mRadioFalse.isChecked()) {
                                 question.add(questionText);
                                 answer.add("False");
                                 type.add(2);
@@ -376,10 +381,12 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 if(question.isEmpty()) {
                     Context context = getApplicationContext();
-                    Toast toast = Toast.makeText(context, "Quiz is empty!", Toast.LENGTH_SHORT);
-                    toast.show();
-                } else
+                    Toast.makeText(context, "Quiz is empty!", Toast.LENGTH_SHORT).show();
+                } else {
+                    getIntent().putStringArrayListExtra("questions", question);
+                    getIntent().putStringArrayListExtra("answer", answer);
                     startActivity(new Intent(QuizActivity.this, DisplayActivity.class));
+                }
             }
         });
     }

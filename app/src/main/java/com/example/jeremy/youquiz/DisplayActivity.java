@@ -15,6 +15,6 @@ public class DisplayActivity extends AppCompatActivity {
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
-        
+
     }
 }
