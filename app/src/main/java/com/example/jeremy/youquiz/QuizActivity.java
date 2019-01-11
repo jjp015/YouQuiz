@@ -45,6 +45,7 @@ public class QuizActivity extends AppCompatActivity {
     private double mScore = 0;
     private String spinnerChoice, questionText, shortAnswerText;
     private String answerList = "";
+    private static final String TAG = "QuizActivity";
 
     ArrayList<String>question = new ArrayList<>();
     ArrayList<String>answer = new ArrayList<>();
