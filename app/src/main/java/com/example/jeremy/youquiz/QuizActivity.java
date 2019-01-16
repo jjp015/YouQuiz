@@ -47,9 +47,7 @@ public class QuizActivity extends AppCompatActivity {
     private String answerList = "";
     private static final String TAG = "QuizActivity";
 
-    ArrayList<String>question = new ArrayList<>();
-    ArrayList<String>answer = new ArrayList<>();
-    ArrayList<Integer>type = new ArrayList<>();
+    ArrayList<Quiz>quiz = new ArrayList<>();
 
     public QuizActivity() {
 
@@ -171,7 +169,7 @@ public class QuizActivity extends AppCompatActivity {
         mEditTextC = findViewById(R.id.edit_text_c);
         mEditTextD = findViewById(R.id.edit_text_d);
         mShortAnswer = findViewById(R.id.short_answer_text);
-    /*    mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
+        mInputEditText.setOnFocusChangeListener(new View.OnFocusChangeListener() {
             @Override
             public void onFocusChange(View v, boolean hasFocus) {
                 if (!hasFocus) {
@@ -243,7 +241,7 @@ public class QuizActivity extends AppCompatActivity {
                 }
             }
         });
-        */
+
 
         mCheckBoxA = findViewById(R.id.check_a);
         mCheckBoxB = findViewById(R.id.check_b);
@@ -268,27 +266,19 @@ public class QuizActivity extends AppCompatActivity {
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
                                 if(mRadioA.isChecked()) {
-                                    question.add(questionText);
-                                    answer.add("A");
-                                    type.add(0);
+                                    quiz.add(new Quiz(questionText, "A", 0));
                                     toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioB.isChecked()) {
-                                    question.add(questionText);
-                                    answer.add("B");
-                                    type.add(0);
+                                    quiz.add(new Quiz(questionText, "B", 0));
                                     toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioC.isChecked()) {
-                                    question.add(questionText);
-                                    answer.add("C");
-                                    type.add(0);
+                                    quiz.add(new Quiz(questionText, "C", 0));
                                     toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioD.isChecked()) {
-                                    question.add(questionText);
-                                    answer.add("D");
-                                    type.add(0);
+                                    quiz.add(new Quiz(questionText, "D", 0));
                                     toast = Toast.makeText(context, "D", Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else {
@@ -318,9 +308,7 @@ public class QuizActivity extends AppCompatActivity {
                                     if(mCheckBoxD.isChecked()) {
                                         answerList = answerList + "D";
                                     }
-                                    question.add(questionText);
-                                    answer.add(answerList);
-                                    type.add(1);
+                                    quiz.add(new Quiz(questionText, answerList, 1));
                                     toast = Toast.makeText(context, answerList, Toast.LENGTH_SHORT);
                                     clearForm();
                                     answerList = "";
@@ -334,15 +322,11 @@ public class QuizActivity extends AppCompatActivity {
                             break;
                         case "True/False":
                             if (mRadioTrue.isChecked()) {
-                                question.add(questionText);
-                                answer.add("True");
-                                type.add(2);
+                                quiz.add(new Quiz(questionText, "True", 2));
                                 toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else if (mRadioFalse.isChecked()) {
-                                question.add(questionText);
-                                answer.add("False");
-                                type.add(2);
+                                quiz.add(new Quiz(questionText, "False", 2));
                                 toast = Toast.makeText(context, "False", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
@@ -353,9 +337,7 @@ public class QuizActivity extends AppCompatActivity {
                         case "Short Answer":
                             shortAnswerText = mShortAnswer.getText().toString();
                             if (shortAnswerText.length() > 0) {
-                                question.add(questionText);
-                                answer.add(shortAnswerText);
-                                type.add(3);
+                                quiz.add(new Quiz(questionText, shortAnswerText, 3));
                                 toast = Toast.makeText(context, "Short answer", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
@@ -380,13 +362,13 @@ public class QuizActivity extends AppCompatActivity {
         mCompleteButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if(question.isEmpty()) {
+                if(quiz.isEmpty()) {
                     Context context = getApplicationContext();
                     Toast.makeText(context, "Quiz is empty!", Toast.LENGTH_SHORT).show();
                 } else {
-                    getIntent().putStringArrayListExtra("questions", question);
-                    getIntent().putStringArrayListExtra("answer", answer);
-                    startActivity(new Intent(QuizActivity.this, DisplayActivity.class));
+                    Intent intent = new Intent(QuizActivity.this, DisplayActivity.class);
+                    intent.putParcelableArrayListExtra("quiz", quiz);
+                    startActivity(intent);
                 }
             }
         });

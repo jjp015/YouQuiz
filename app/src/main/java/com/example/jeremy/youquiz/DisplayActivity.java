@@ -1,5 +1,6 @@
 package com.example.jeremy.youquiz;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -23,10 +24,11 @@ public class DisplayActivity extends AppCompatActivity {
 
         Log.d(TAG, "onCreate(Bundle) called");
 
-        ArrayList<String> questionList = getIntent().getStringArrayListExtra("question");
-        ArrayList<String>answerList = getIntent().getStringArrayListExtra("answer");
+        Intent intent = getIntent();
+
+        ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
         Log.d(TAG, "Received arrays");
 
-        Log.d(TAG, "Size of array is: " + questionList.size());
+        Log.d(TAG, "Size of array is: " + quiz.size());
     }
 }
