@@ -19,13 +19,12 @@ public class DisplayActivity extends AppCompatActivity {
     private static final String KEY_INDEX = "index";
     private int mCurrentIndex = 0;
 
-    Intent intent = getIntent();
-    ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        Intent intent = getIntent();
+        final ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
 
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
@@ -41,12 +40,12 @@ public class DisplayActivity extends AppCompatActivity {
 
             TextView numberText = new TextView(getApplicationContext());
             layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 0.5f);
+                    TableRow.LayoutParams.WRAP_CONTENT, 1.1f);
             numberText.setLayoutParams(layoutParams);
-            numberText.setGravity(Gravity.LEFT);
+            numberText.setGravity(Gravity.END);
             numberText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             numberText.setPaddingRelative(0,0,0,20);
-            numberText.setText(i + 1 +".");
+            numberText.setText(getResources().getString(R.string.number, i + 1));
 
             TextView questionText = new TextView(getApplicationContext());
             layoutParams = new TableRow.LayoutParams(0,
@@ -54,12 +53,12 @@ public class DisplayActivity extends AppCompatActivity {
             questionText.setLayoutParams(layoutParams);
             questionText.setGravity(Gravity.LEFT);
             questionText.setTextSize(getResources().getDimension(R.dimen.displaySize));
-            questionText.setPaddingRelative(0,0,15,20);
+            questionText.setPaddingRelative(10,0,15,20);
             questionText.setText(quiz.get(i).getQuestion());
 
             TextView answerText = new TextView(getApplicationContext());
             layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 3.5f);
+                    TableRow.LayoutParams.WRAP_CONTENT, 4f);
             answerText.setLayoutParams(layoutParams);
             answerText.setGravity(Gravity.CENTER);
             answerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
@@ -88,5 +87,6 @@ public class DisplayActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
     }
 }
