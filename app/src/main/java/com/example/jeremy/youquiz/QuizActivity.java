@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -17,7 +18,6 @@ import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.EditText;
-import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
@@ -27,22 +27,17 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity {
-    private RelativeLayout mMultipleInput, mMultiplCheck, mMultipleRadio, mTrueFalseRadio,
+    private RelativeLayout mMultipleInput, mMultipleCheck, mMultipleRadio, mTrueFalseRadio,
             mButtonGroup;
     private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
     private TextInputEditText mEditText;
-    private Spinner mSpinner;
-    private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
-    private Button mSubmitButton, mClearButton, mDoneButton;
+    private TextInputEditText mEditTextA, mEditTextB, mEditTextC, mEditTextD;
+    private Button mDoneButton;
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
     private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
     private RadioButton mRadioA, mRadioB, mRadioC, mRadioD, mRadioTrue, mRadioFalse;
-    private ImageButton mPrevButton, mNextButton;
-
-    private boolean mAllAnswered = false;
-    private double mScore = 0;
-    private String spinnerChoice, questionText, shortAnswerText;
+    private String spinnerChoice, questionText, shortAnswerText, aText, bText, cText, dText;
     private String answerList = "";
     private static final String TAG = "QuizActivity";
 
@@ -57,6 +52,9 @@ public class QuizActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_quiz);
+        Spinner mSpinner;
+        TextInputEditText mInputEditText;
+        Button mSubmitButton, mClearButton;
 
         mSpinner = findViewById(R.id.spinner);
         // Create an ArrayAdapter using the string array and a default spinner layout
@@ -79,7 +77,7 @@ public class QuizActivity extends AppCompatActivity {
         mDoneButton= findViewById(R.id.done_button);
         mMultipleInput = findViewById(R.id.multiple_input);
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
-        mMultiplCheck = findViewById(R.id.multiple_check);
+        mMultipleCheck = findViewById(R.id.multiple_check);
 
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
@@ -92,7 +90,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTextShortAnswerLayout.setVisibility(View.GONE);
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.GONE);
-                        mMultiplCheck.setVisibility(View.GONE);
+                        mMultipleCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.GONE);
                         mDoneButton.setVisibility(View.GONE);
                         break;
@@ -101,7 +99,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTextShortAnswerLayout.setVisibility(View.GONE);
                         mMultipleRadio.setVisibility(View.VISIBLE);
                         mTrueFalseRadio.setVisibility(View.GONE);
-                        mMultiplCheck.setVisibility(View.GONE);
+                        mMultipleCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
                         mDoneButton.setVisibility(View.VISIBLE);
                         break;
@@ -110,7 +108,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTextShortAnswerLayout.setVisibility(View.GONE);
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.VISIBLE);
-                        mMultiplCheck.setVisibility(View.GONE);
+                        mMultipleCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
                         mDoneButton.setVisibility(View.VISIBLE);
                         break;
@@ -119,7 +117,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTextShortAnswerLayout.setVisibility(View.GONE);
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.GONE);
-                        mMultiplCheck.setVisibility(View.VISIBLE);
+                        mMultipleCheck.setVisibility(View.VISIBLE);
                         mButtonGroup.setVisibility(View.VISIBLE);
                         mDoneButton.setVisibility(View.VISIBLE);
                         break;
@@ -128,7 +126,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTextShortAnswerLayout.setVisibility(View.VISIBLE);
                         mMultipleRadio.setVisibility(View.GONE);
                         mTrueFalseRadio.setVisibility(View.GONE);
-                        mMultiplCheck.setVisibility(View.GONE);
+                        mMultipleCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
                         mDoneButton.setVisibility(View.VISIBLE);
                         break;
@@ -256,53 +254,61 @@ public class QuizActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Context context = getApplicationContext();
                 questionText = mEditText.getText().toString();
-                Toast toast = Toast.makeText(context, "Enter in a question!", Toast.LENGTH_SHORT);
+                Toast toast = Toast.makeText(context, "Enter in a question!",
+                        Toast.LENGTH_SHORT);
                 if (questionText.length() > 500) {
-                    toast = Toast.makeText(context, "Error: Question is too long (Max 500)", Toast.LENGTH_SHORT);
+                    toast = Toast.makeText(context, "Error: Question is too long (Max 500)",
+                            Toast.LENGTH_SHORT);
                 }
                 else if(questionText.length() > 0) {
                     switch (spinnerChoice) {
                         case "Multiple Choice":
-                            if (mEditTextA.getText().toString().length() > 30 &&
-                                    mEditTextB.getText().toString().length() > 30 &&
-                                    mEditTextC.getText().toString().length() > 30 &&
-                                    mEditTextD.getText().toString().length() > 30) {
-                                toast = Toast.makeText(context, "Error: Answer is too long (Max 30)", Toast.LENGTH_SHORT);
+                            aText = mEditTextA.getText().toString();
+                            bText = mEditTextB.getText().toString();
+                            cText = mEditTextC.getText().toString();
+                            dText = mEditTextD.getText().toString();
+                            if (aText.length() > 30 && bText.length() > 30 && cText.length() > 30 &&
+                                    dText.length() > 30) {
+                                toast = Toast.makeText(context, "Error: Answer is too long " +
+                                        "(Max 30)", Toast.LENGTH_SHORT);
                             }
-                            else if (mEditTextA.getText().toString().length() > 0 &&
-                                    mEditTextB.getText().toString().length() > 0 &&
-                                    mEditTextC.getText().toString().length() > 0 &&
-                                    mEditTextD.getText().toString().length() > 0) {
+                            else if (aText.length() > 0 && bText.length() > 0 && cText.length() > 0
+                                    && dText.toString().length() > 0) {
                                 if(mRadioA.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "A", 0));
-                                    toast = Toast.makeText(context, "A", Toast.LENGTH_SHORT);
+                                    quiz.add(new Quiz(questionText, "A. " + aText, 0));
+                                    toast = Toast.makeText(context, "A" + aText, Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioB.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "B", 0));
-                                    toast = Toast.makeText(context, "B", Toast.LENGTH_SHORT);
+                                    quiz.add(new Quiz(questionText, "B. " + bText, 0));
+                                    toast = Toast.makeText(context, "B" + bText, Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioC.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "C", 0));
-                                    toast = Toast.makeText(context, "C", Toast.LENGTH_SHORT);
+                                    quiz.add(new Quiz(questionText, "C. " + cText, 0));
+                                    toast = Toast.makeText(context, "C" + cText, Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioD.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "D", 0));
-                                    toast = Toast.makeText(context, "D", Toast.LENGTH_SHORT);
+                                    quiz.add(new Quiz(questionText, "D. " + dText, 0));
+                                    toast = Toast.makeText(context, "D" + dText, Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else {
-                                    toast = Toast.makeText(context, "Select answer choice!", Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, "Select answer choice!",
+                                            Toast.LENGTH_SHORT);
                                 }
                             } else {
-                                toast = Toast.makeText(context, "Fill in answer choices!", Toast.LENGTH_SHORT);
+                                toast = Toast.makeText(context, "Fill in answer choices!",
+                                        Toast.LENGTH_SHORT);
                             }
                             toast.show();
                             break;
                         case "Multiple Answer Choices":
-                            if (mEditTextA.getText().toString().length() > 30 &&
-                                    mEditTextB.getText().toString().length() > 30 &&
-                                    mEditTextC.getText().toString().length() > 30 &&
-                                    mEditTextD.getText().toString().length() > 30) {
-                                toast = Toast.makeText(context, "Error: Answer is too long (Max 30)", Toast.LENGTH_SHORT);
+                            aText = mEditTextA.getText().toString();
+                            bText = mEditTextB.getText().toString();
+                            cText = mEditTextC.getText().toString();
+                            dText = mEditTextD.getText().toString();
+                            if (aText.length() > 30 && bText.length() > 30 && cText.length() > 30 &&
+                                    dText.length() > 30) {
+                                toast = Toast.makeText(context, "Error: Answer is too long " +
+                                        "(Max 30)", Toast.LENGTH_SHORT);
                             }
                             else if (mEditTextA.getText().toString().length() > 0 &&
                                     mEditTextB.getText().toString().length() > 0 &&
@@ -311,26 +317,28 @@ public class QuizActivity extends AppCompatActivity {
                                 if (mCheckBoxA.isChecked() || mCheckBoxB.isChecked() ||
                                         mCheckBoxC.isChecked() || mCheckBoxD.isChecked()) {
                                     if(mCheckBoxA.isChecked()) {
-                                        answerList = answerList + "A";
+                                        answerList = answerList + "A. " + aText + "\n";
                                     }
                                     if(mCheckBoxB.isChecked()) {
-                                        answerList = answerList + "B";
+                                        answerList = answerList + "B. " + bText + "\n";
                                     }
                                     if(mCheckBoxC.isChecked()) {
-                                        answerList = answerList + "C";
+                                        answerList = answerList + "C. " + cText + "\n";
                                     }
                                     if(mCheckBoxD.isChecked()) {
-                                        answerList = answerList + "D";
+                                        answerList = answerList + "D. " + dText;
                                     }
                                     quiz.add(new Quiz(questionText, answerList, 1));
                                     toast = Toast.makeText(context, answerList, Toast.LENGTH_SHORT);
                                     clearForm();
                                     answerList = "";
                                 } else {
-                                    toast = Toast.makeText(context, "Select answer choice(s)!", Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, "Select answer choice(s)!",
+                                            Toast.LENGTH_SHORT);
                                 }
                             } else {
-                                toast = Toast.makeText(context, "Fill in answer choices!", Toast.LENGTH_SHORT);
+                                toast = Toast.makeText(context, "Fill in answer choices!",
+                                        Toast.LENGTH_SHORT);
                             }
                             toast.show();
                             break;
@@ -344,21 +352,25 @@ public class QuizActivity extends AppCompatActivity {
                                 toast = Toast.makeText(context, "False", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
-                                toast = Toast.makeText(context, "Select answer choice!", Toast.LENGTH_SHORT);
+                                toast = Toast.makeText(context, "Select answer choice!",
+                                        Toast.LENGTH_SHORT);
                             }
                             toast.show();
                             break;
                         case "Short Answer":
                             shortAnswerText = mShortAnswer.getText().toString();
                             if (shortAnswerText.length() > 30) {
-                                toast = Toast.makeText(context, "Error: Answer is too long (Max 30)", Toast.LENGTH_SHORT);
+                                toast = Toast.makeText(context, "Error: Answer is too long " +
+                                        "(Max 30)", Toast.LENGTH_SHORT);
                             }
                             else if (shortAnswerText.length() > 0) {
                                 quiz.add(new Quiz(questionText, shortAnswerText, 3));
-                                toast = Toast.makeText(context, "Short answer", Toast.LENGTH_SHORT);
+                                toast = Toast.makeText(context, "Short answer",
+                                        Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
-                                toast = Toast.makeText(context, "Fill in short answer!", Toast.LENGTH_SHORT);
+                                toast = Toast.makeText(context, "Fill in short answer!",
+                                        Toast.LENGTH_SHORT);
                             }
                             toast.show();
                             break;
@@ -383,7 +395,9 @@ public class QuizActivity extends AppCompatActivity {
                     Context context = getApplicationContext();
                     Toast.makeText(context, "Quiz is empty!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Intent intent = new Intent(QuizActivity.this, DisplayActivity.class);
+                    Log.d(TAG, "Started DisplayActivity");
+                    Intent intent = new Intent(QuizActivity.this,
+                            DisplayActivity.class);
                     intent.putParcelableArrayListExtra("quiz", quiz);
                     startActivity(intent);
                 }
