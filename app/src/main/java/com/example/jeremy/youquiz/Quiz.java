@@ -4,15 +4,27 @@ import android.os.Parcel;
 import android.os.Parcelable;
 
 public class Quiz implements Parcelable {
-    String mQuestion;
-    String mAnswer;
-    int mType;
+    private String mQuestion;
+    private String mAnswer;
+    private int mType;
+
     public Quiz(String question, String answer, int type) {
         mQuestion = question;
         mAnswer = answer;
         mType = type;
     }
 
+    public String getQuestion() {
+        return mQuestion;
+    }
+
+    public String getAnswer() {
+        return mAnswer;
+    }
+
+    public int getType() {
+        return mType;
+    }
 
     protected Quiz(Parcel in) {
         mQuestion = in.readString();
