@@ -336,7 +336,10 @@ public class QuizActivity extends AppCompatActivity {
                             break;
                         case "Short Answer":
                             shortAnswerText = mShortAnswer.getText().toString();
-                            if (shortAnswerText.length() > 0) {
+                            if (shortAnswerText.length() > 15) {
+                                toast = Toast.makeText(context, "Error: Answer is too long (Max 15)", Toast.LENGTH_SHORT);
+                            }
+                            else if (shortAnswerText.length() > 0) {
                                 quiz.add(new Quiz(questionText, shortAnswerText, 3));
                                 toast = Toast.makeText(context, "Short answer", Toast.LENGTH_SHORT);
                                 clearForm();
