@@ -276,19 +276,23 @@ public class QuizActivity extends AppCompatActivity {
                                     && dText.toString().length() > 0) {
                                 if(mRadioA.isChecked()) {
                                     quiz.add(new Quiz(questionText, "A. " + aText, 0));
-                                    toast = Toast.makeText(context, "A" + aText, Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, "A" + aText,
+                                            Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioB.isChecked()) {
                                     quiz.add(new Quiz(questionText, "B. " + bText, 0));
-                                    toast = Toast.makeText(context, "B" + bText, Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, "B" + bText,
+                                            Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioC.isChecked()) {
                                     quiz.add(new Quiz(questionText, "C. " + cText, 0));
-                                    toast = Toast.makeText(context, "C" + cText, Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, "C" + cText,
+                                            Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioD.isChecked()) {
                                     quiz.add(new Quiz(questionText, "D. " + dText, 0));
-                                    toast = Toast.makeText(context, "D" + dText, Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, "D" + dText,
+                                            Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else {
                                     toast = Toast.makeText(context, "Select answer choice!",
@@ -395,11 +399,11 @@ public class QuizActivity extends AppCompatActivity {
                     Context context = getApplicationContext();
                     Toast.makeText(context, "Quiz is empty!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d(TAG, "Started DisplayActivity");
                     Intent intent = new Intent(QuizActivity.this,
                             DisplayActivity.class);
                     intent.putParcelableArrayListExtra("quiz", quiz);
                     startActivity(intent);
+                    Log.d(TAG, "Started DisplayActivity");
                 }
             }
         });

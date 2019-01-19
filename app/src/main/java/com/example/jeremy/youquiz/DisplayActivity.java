@@ -14,27 +14,21 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class DisplayActivity extends AppCompatActivity {
-    private Button mBackButton, mFinishButton;
     private static final String TAG = "DisplayActivity";
-    private static final String KEY_INDEX = "index";
-    private int mCurrentIndex = 0;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
+        Button mBackButton, mFinishButton;
         Intent intent = getIntent();
         final ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
-
-        if (savedInstanceState != null)
-            mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
-
         TableLayout tableLayout = findViewById(R.id.display_activity);
         TableRow.LayoutParams layoutParams;
         TableRow[] tableRow = new TableRow[quiz.size()];
+
         mBackButton = findViewById(R.id.back_button);
         mFinishButton = findViewById(R.id.finish_button);
-
         for(int i = 0; i < quiz.size(); i++) {
             tableRow[i] = new TableRow(getApplicationContext());
 
@@ -85,6 +79,7 @@ public class DisplayActivity extends AppCompatActivity {
                 Intent intent = new Intent(DisplayActivity.this, QuestionActivity.class);
                 intent.putParcelableArrayListExtra("quiz", quiz);
                 startActivity(intent);
+                Log.d(TAG, "Started QuestionActivity");
             }
         });
 
