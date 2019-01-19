@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
-import android.util.Log;
 import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
@@ -34,7 +33,7 @@ public class QuizActivity extends AppCompatActivity {
     private TextInputEditText mEditText;
     private Spinner mSpinner;
     private TextInputEditText mInputEditText, mEditTextA, mEditTextB, mEditTextC, mEditTextD;
-    private Button mSubmitButton, mClearButton, mCompleteButton;
+    private Button mSubmitButton, mClearButton, mDoneButton;
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
     private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
@@ -77,7 +76,7 @@ public class QuizActivity extends AppCompatActivity {
         mRadioD = findViewById(R.id.radio_d);
         mRadioTrue = findViewById(R.id.radio_true);
         mRadioFalse = findViewById(R.id.radio_false);
-        mCompleteButton= findViewById(R.id.complete_button);
+        mDoneButton= findViewById(R.id.done_button);
         mMultipleInput = findViewById(R.id.multiple_input);
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
         mMultiplCheck = findViewById(R.id.multiple_check);
@@ -95,7 +94,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.GONE);
-                        mCompleteButton.setVisibility(View.GONE);
+                        mDoneButton.setVisibility(View.GONE);
                         break;
                     case "Multiple Choice":
                         mMultipleInput.setVisibility(View.VISIBLE);
@@ -104,7 +103,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
-                        mCompleteButton.setVisibility(View.VISIBLE);
+                        mDoneButton.setVisibility(View.VISIBLE);
                         break;
                     case "True/False":
                         mMultipleInput.setVisibility(View.GONE);
@@ -113,7 +112,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.VISIBLE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
-                        mCompleteButton.setVisibility(View.VISIBLE);
+                        mDoneButton.setVisibility(View.VISIBLE);
                         break;
                     case "Multiple Answer Choices":
                         mMultipleInput.setVisibility(View.VISIBLE);
@@ -122,7 +121,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.VISIBLE);
                         mButtonGroup.setVisibility(View.VISIBLE);
-                        mCompleteButton.setVisibility(View.VISIBLE);
+                        mDoneButton.setVisibility(View.VISIBLE);
                         break;
                     case "Short Answer":
                         mMultipleInput.setVisibility(View.GONE);
@@ -131,7 +130,7 @@ public class QuizActivity extends AppCompatActivity {
                         mTrueFalseRadio.setVisibility(View.GONE);
                         mMultiplCheck.setVisibility(View.GONE);
                         mButtonGroup.setVisibility(View.VISIBLE);
-                        mCompleteButton.setVisibility(View.VISIBLE);
+                        mDoneButton.setVisibility(View.VISIBLE);
                         break;
                 }
             }
@@ -377,7 +376,7 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-        mCompleteButton.setOnClickListener(new View.OnClickListener() {
+        mDoneButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if(quiz.isEmpty()) {

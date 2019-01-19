@@ -33,11 +33,10 @@
     <string name="short_answer_fill">Fill short answer</string>
     <string name="submit_button">Submit</string>
     <string name="clear_button">Clear</string>
-    <string name="complete_button">Complete</string>
+    <string name="finish_button">Finish</string>
     <string name="empty_toast">Please fill in the input field(s)!</string>
     <string name="back_button">Back</string>
     <string name="question">Questions</string>
     <string name="answer">Answers</string>
-    <string name="edit_button">Edit</string>
-    <string name="finish_button">Finish</string>
+    <string name="done_button">Done</string>
 </resources>
