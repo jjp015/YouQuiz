@@ -258,10 +258,19 @@ public class QuizActivity extends AppCompatActivity {
                 Context context = getApplicationContext();
                 questionText = mEditText.getText().toString();
                 Toast toast = Toast.makeText(context, "Enter in a question!", Toast.LENGTH_SHORT);
-                if(questionText.length() > 0) {
+                if (questionText.length() > 500) {
+                    toast = Toast.makeText(context, "Error: Question is too long (Max 500)", Toast.LENGTH_SHORT);
+                }
+                else if(questionText.length() > 0) {
                     switch (spinnerChoice) {
                         case "Multiple Choice":
-                            if (mEditTextA.getText().toString().length() > 0 &&
+                            if (mEditTextA.getText().toString().length() > 30 &&
+                                    mEditTextB.getText().toString().length() > 30 &&
+                                    mEditTextC.getText().toString().length() > 30 &&
+                                    mEditTextD.getText().toString().length() > 30) {
+                                toast = Toast.makeText(context, "Error: Answer is too long (Max 30)", Toast.LENGTH_SHORT);
+                            }
+                            else if (mEditTextA.getText().toString().length() > 0 &&
                                     mEditTextB.getText().toString().length() > 0 &&
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
@@ -290,7 +299,13 @@ public class QuizActivity extends AppCompatActivity {
                             toast.show();
                             break;
                         case "Multiple Answer Choices":
-                            if (mEditTextA.getText().toString().length() > 0 &&
+                            if (mEditTextA.getText().toString().length() > 30 &&
+                                    mEditTextB.getText().toString().length() > 30 &&
+                                    mEditTextC.getText().toString().length() > 30 &&
+                                    mEditTextD.getText().toString().length() > 30) {
+                                toast = Toast.makeText(context, "Error: Answer is too long (Max 30)", Toast.LENGTH_SHORT);
+                            }
+                            else if (mEditTextA.getText().toString().length() > 0 &&
                                     mEditTextB.getText().toString().length() > 0 &&
                                     mEditTextC.getText().toString().length() > 0 &&
                                     mEditTextD.getText().toString().length() > 0) {
@@ -336,8 +351,8 @@ public class QuizActivity extends AppCompatActivity {
                             break;
                         case "Short Answer":
                             shortAnswerText = mShortAnswer.getText().toString();
-                            if (shortAnswerText.length() > 15) {
-                                toast = Toast.makeText(context, "Error: Answer is too long (Max 15)", Toast.LENGTH_SHORT);
+                            if (shortAnswerText.length() > 30) {
+                                toast = Toast.makeText(context, "Error: Answer is too long (Max 30)", Toast.LENGTH_SHORT);
                             }
                             else if (shortAnswerText.length() > 0) {
                                 quiz.add(new Quiz(questionText, shortAnswerText, 3));
