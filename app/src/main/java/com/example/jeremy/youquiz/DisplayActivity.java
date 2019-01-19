@@ -40,9 +40,11 @@ public class DisplayActivity extends AppCompatActivity {
 
             TextView numberText = new TextView(getApplicationContext());
             layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 1f);
+                    TableRow.LayoutParams.WRAP_CONTENT, 0.5f);
             numberText.setLayoutParams(layoutParams);
             numberText.setGravity(Gravity.LEFT);
+            numberText.setTextSize(getResources().getDimension(R.dimen.displaySize));
+            numberText.setPaddingRelative(0,0,0,15);
             numberText.setText(i + 1 +".");
 
             TextView questionText = new TextView(getApplicationContext());
@@ -50,13 +52,17 @@ public class DisplayActivity extends AppCompatActivity {
                     TableRow.LayoutParams.WRAP_CONTENT, 5f);
             questionText.setLayoutParams(layoutParams);
             questionText.setGravity(Gravity.LEFT);
+            questionText.setTextSize(getResources().getDimension(R.dimen.displaySize));
+            questionText.setPaddingRelative(0,0,0,15);
             questionText.setText(quiz.get(i).getQuestion());
 
             TextView answerText = new TextView(getApplicationContext());
             layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 3f);
+                    TableRow.LayoutParams.WRAP_CONTENT, 3.5f);
             answerText.setLayoutParams(layoutParams);
-            answerText.setGravity(Gravity.LEFT);
+            answerText.setGravity(Gravity.CENTER);
+            answerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
+            answerText.setPaddingRelative(0,0,0,15);
             answerText.setText(quiz.get(i).getAnswer());
 
             tableRow[i].addView(numberText);
@@ -66,27 +72,5 @@ public class DisplayActivity extends AppCompatActivity {
             tableLayout.addView(tableRow[i]);
         }
 
-        /*
-        TableRow tableRow = new TableRow(this.getApplicationContext());
-        TableRow.LayoutParams layoutParams = new TableRow.LayoutParams(TableLayout.LayoutParams.MATCH_PARENT);
-        tableRow = new TableRow(this);
-        TextView numberText = new TextView(this);
-        TextView questionText = new TextView(this);
-        TextView answerText = new TextView(this);
-        */
-
-        /*
-        for(int i = 0; i < quiz.size(); i++) {
-            tableRow = new TableRow(this.getApplicationContext());
-            //numberText.setLayoutParams(layoutParams);
-            numberText.setText(i + 1 +".");
-            tableLayout.addView(numberText);
-            //questionText.setLayoutParams(layoutParams);
-            questionText.setText(quiz.get(i).getQuestion());
-            tableLayout.addView(questionText);
-            answerText.setText(quiz.get(i).getAnswer());
-            tableLayout.addView(answerText);
-        }
-        */
     }
 }
