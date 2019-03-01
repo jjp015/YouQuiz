@@ -24,7 +24,7 @@
         android:layout_height="wrap_content"
         android:visibility="gone">
         <View
-            android:id="@+id/view_center"
+            android:id="@+id/view_center_3"
             android:layout_width="0dp"
             android:layout_height="0dp"
             android:visibility="invisible"
@@ -35,28 +35,28 @@
             android:layout_height="wrap_content"
             android:text="@string/option_a"
             android:layout_alignParentStart="true"
-            android:layout_toStartOf="@id/view_center_2"/>
+            android:layout_toStartOf="@id/view_center_3"/>
         <CheckBox
             android:id="@+id/check_b_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_b"
             android:layout_alignParentEnd="true"
-            android:layout_toEndOf="@id/view_center_2"/>
+            android:layout_toEndOf="@id/view_center_3"/>
         <CheckBox
             android:id="@+id/check_c_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_c"
-            android:layout_toStartOf="@id/view_center_2"
-            android:layout_below="@id/check_a"/>
+            android:layout_toStartOf="@id/view_center_3"
+            android:layout_below="@id/check_a_quiz"/>
         <CheckBox
             android:id="@+id/check_d_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_d"
-            android:layout_below="@id/check_b"
-            android:layout_toEndOf="@id/check_c"/>
+            android:layout_below="@id/check_b_quiz"
+            android:layout_toEndOf="@id/check_c_quiz"/>
     </RelativeLayout>
     <android.support.design.widget.TextInputLayout
         android:id="@+id/short_answer_layout_quiz"
