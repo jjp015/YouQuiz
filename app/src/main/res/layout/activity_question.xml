@@ -19,7 +19,7 @@
         android:layout_height="wrap_content"
         android:padding="24dp" />
     <RelativeLayout
-        android:id="@+id/multiple_check"
+        android:id="@+id/multiple_check_quiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
@@ -30,28 +30,28 @@
             android:visibility="invisible"
             android:layout_centerHorizontal="true"/>
         <CheckBox
-            android:id="@+id/check_a"
+            android:id="@+id/check_a_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_a"
             android:layout_alignParentStart="true"
             android:layout_toStartOf="@id/view_center_2"/>
         <CheckBox
-            android:id="@+id/check_b"
+            android:id="@+id/check_b_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_b"
             android:layout_alignParentEnd="true"
             android:layout_toEndOf="@id/view_center_2"/>
         <CheckBox
-            android:id="@+id/check_c"
+            android:id="@+id/check_c_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_c"
             android:layout_toStartOf="@id/view_center_2"
             android:layout_below="@id/check_a"/>
         <CheckBox
-            android:id="@+id/check_d"
+            android:id="@+id/check_d_quiz"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:text="@string/option_d"
@@ -59,7 +59,7 @@
             android:layout_toEndOf="@id/check_c"/>
     </RelativeLayout>
     <android.support.design.widget.TextInputLayout
-        android:id="@+id/short_answer_layout"
+        android:id="@+id/short_answer_layout_quiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         app:hintEnabled="false"
@@ -68,59 +68,64 @@
         app:counterMaxLength="30"
         android:visibility="gone">
         <android.support.design.widget.TextInputEditText
-            android:id="@+id/short_answer_question_text"
+            android:id="@+id/short_answer_question_text_quiz"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:gravity="center"
             android:inputType="textCapSentences" />
     </android.support.design.widget.TextInputLayout>
     <RelativeLayout
-        android:id="@+id/multiple_radio"
+        android:id="@+id/multiple_radio_quiz"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
         <RadioGroup
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:id="@+id/multiple_radio_group">
+            android:id="@+id/multiple_radio_group_quiz">
             <RadioButton
-                android:id="@+id/radio_a"
+                android:id="@+id/radio_a_quiz"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/option_a" />
             <RadioButton
-                android:id="@+id/radio_b"
+                android:id="@+id/radio_b_quiz"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/option_b" />
             <RadioButton
-                android:id="@+id/radio_c"
+                android:id="@+id/radio_c_quiz"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/option_c" />
             <RadioButton
-                android:id="@+id/radio_d"
+                android:id="@+id/radio_d_quiz"
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/option_d" />
         </RadioGroup>
     </RelativeLayout>
-    <LinearLayout
-        android:layout_width="wrap_content"
+    <RelativeLayout
+        android:id="@+id/true_false_radio_quiz"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
         android:visibility="gone">
-        <Button
-            android:id="@+id/true_button"
+        <RadioGroup
+            android:id="@+id/true_false_radio_group_quiz"
             android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/true_button" />
-        <Button
-            android:id="@+id/false_button"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/false_button" />
-    </LinearLayout>
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/radio_true_quiz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/true_button" />
+            <RadioButton
+                android:id="@+id/radio_false_quiz"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/false_button" />
+        </RadioGroup>
+    </RelativeLayout>
     <LinearLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -138,4 +143,10 @@
             android:src="@drawable/arrow_right"
             android:contentDescription="@string/next_button" />
     </LinearLayout>
+    <Button
+        android:id="@+id/submit_button_quiz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/submit_button"
+        android:layout_gravity="center" />
 </LinearLayout>
