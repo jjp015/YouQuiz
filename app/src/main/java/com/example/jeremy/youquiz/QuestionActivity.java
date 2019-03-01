@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.CheckBox;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,6 +31,7 @@ public class QuestionActivity extends AppCompatActivity {
     private RadioGroup mRadioGroupMultipleQuiz, mRadioGroupTrueFalseQuiz;
     private RadioButton mRadioAquiz, mRadioBquiz, mRadioCquiz, mRadioDquiz, mRadioTrueQuiz,
             mRadioFalseQuiz;
+    private CheckBox mCheckBoxAquiz, mCheckBoxBquiz, mCheckBoxCquiz, mCheckBoxDquiz;
     private ImageButton mPrevButton, mNextButton;
     private Button mBackButtonQuiz, mSubmitButtonQuiz;
     private boolean mAllAnswered = false;
@@ -56,6 +58,10 @@ public class QuestionActivity extends AppCompatActivity {
         mRadioBquiz = findViewById(R.id.radio_b_quiz);
         mRadioCquiz = findViewById(R.id.radio_c_quiz);
         mRadioDquiz = findViewById(R.id.radio_d_quiz);
+        mCheckBoxAquiz = findViewById(R.id.check_a_quiz);
+        mCheckBoxBquiz = findViewById(R.id.check_b_quiz);
+        mCheckBoxCquiz = findViewById(R.id.check_c_quiz);
+        mCheckBoxDquiz = findViewById(R.id.check_d_quiz);
         mRadioTrueQuiz = findViewById(R.id.radio_true);
         mRadioFalseQuiz = findViewById(R.id.radio_false);
 
@@ -128,9 +134,10 @@ public class QuestionActivity extends AppCompatActivity {
 
     private void updateType() {
         questionType = quizList.get(mCurrentIndex).getType();
+        int counter = 0;
         switch(questionType) {
             case 0: //Multiple Choice
-                int counter = 0;
+                counter = 0;
                 answerChoice = "A. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(i) == '`') break;
@@ -176,15 +183,62 @@ public class QuestionActivity extends AppCompatActivity {
                         counter++;
                     }
                 }
-                counter = 0;
                 mRadioDquiz.setText(answerChoice);
-                
+
                 mTextShortAnswerLayoutQuiz.setVisibility(View.GONE);
                 mMultipleRadioQuiz.setVisibility(View.VISIBLE);
                 mTrueFalseRadioQuiz.setVisibility(View.GONE);
                 mMultipleCheckQuiz.setVisibility(View.GONE);
                 break;
             case 1: //Multiple Answer Choices
+                counter = 0;
+                answerChoice = "A. ";
+                for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
+                    if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(i) == '`') break;
+                    else {
+                        answerChoice = answerChoice +
+                                quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter);
+                        counter++;
+                    }
+                }
+                counter++;
+                mCheckBoxAquiz.setText(answerChoice);
+                answerChoice = "B. ";
+
+                for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
+                    if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
+                    else {
+                        answerChoice = answerChoice +
+                                quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter);
+                        counter++;
+                    }
+                }
+                counter++;
+                mCheckBoxBquiz.setText(answerChoice);
+                answerChoice = "C. ";
+
+                for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
+                    if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
+                    else {
+                        answerChoice = answerChoice +
+                                quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter);
+                        counter++;
+                    }
+                }
+                counter++;
+                mCheckBoxCquiz.setText(answerChoice);
+                answerChoice = "D. ";
+
+                for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
+                    if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
+                    else {
+                        answerChoice = answerChoice +
+                                quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter);
+                        counter++;
+                    }
+                }
+                mCheckBoxDquiz.setText(answerChoice);
+
                 mTextShortAnswerLayoutQuiz.setVisibility(View.GONE);
                 mMultipleRadioQuiz.setVisibility(View.GONE);
                 mTrueFalseRadioQuiz.setVisibility(View.GONE);
