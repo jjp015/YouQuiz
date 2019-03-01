@@ -54,7 +54,7 @@ public class DisplayActivity extends AppCompatActivity {
             layoutParams = new TableRow.LayoutParams(0,
                     TableRow.LayoutParams.WRAP_CONTENT, 4f);
             answerText.setLayoutParams(layoutParams);
-            answerText.setGravity(Gravity.CENTER);
+            answerText.setGravity(Gravity.LEFT);
             answerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             answerText.setPaddingRelative(0,0,0,20);
             answerText.setText(quiz.get(i).getAnswer());

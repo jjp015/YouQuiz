@@ -7,11 +7,13 @@ public class Quiz implements Parcelable {
     private String mQuestion;
     private String mAnswer;
     private int mType;
+    private String mAnswerChoice;
 
-    public Quiz(String question, String answer, int type) {
+    public Quiz(String question, String answer, int type, String answerChoice) {
         mQuestion = question;
         mAnswer = answer;
         mType = type;
+        mAnswerChoice = answerChoice;
     }
 
     public String getQuestion() {
@@ -26,10 +28,13 @@ public class Quiz implements Parcelable {
         return mType;
     }
 
+    public String getAnswerChoice() { return mAnswerChoice; }
+
     protected Quiz(Parcel in) {
         mQuestion = in.readString();
         mAnswer = in.readString();
         mType = in.readInt();
+        mAnswerChoice = in.readString();
     }
 
     @Override
@@ -37,6 +42,7 @@ public class Quiz implements Parcelable {
         dest.writeString(mQuestion);
         dest.writeString(mAnswer);
         dest.writeInt(mType);
+        dest.writeString(mAnswerChoice);
     }
 
     @Override

@@ -143,10 +143,23 @@
             android:src="@drawable/arrow_right"
             android:contentDescription="@string/next_button" />
     </LinearLayout>
-    <Button
-        android:id="@+id/submit_button_quiz"
-        android:layout_width="wrap_content"
+
+    <RelativeLayout
+        android:id="@+id/button_group2"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/submit_button"
-        android:layout_gravity="center" />
+        android:gravity="center">
+        <Button
+            android:id="@+id/back_button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/back_button"/>
+        <Button
+            android:id="@+id/submit_button_quiz"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/submit_button"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/back_button2"/>
+    </RelativeLayout>
 </LinearLayout>

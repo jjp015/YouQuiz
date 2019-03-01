@@ -275,22 +275,30 @@ public class QuizActivity extends AppCompatActivity {
                             else if (aText.length() > 0 && bText.length() > 0 && cText.length() > 0
                                     && dText.toString().length() > 0) {
                                 if(mRadioA.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "A. " + aText, 0));
+                                    quiz.add(new Quiz(questionText, "A. " + aText, 0,
+                                            aText + '`' + bText + '`' + cText + '`' +
+                                            dText + '`'));
                                     toast = Toast.makeText(context, "A" + aText,
                                             Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioB.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "B. " + bText, 0));
+                                    quiz.add(new Quiz(questionText, "B. " + bText, 0,
+                                            aText + '`' + bText + '`' + cText + '`' +
+                                                    dText + '`'));
                                     toast = Toast.makeText(context, "B" + bText,
                                             Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioC.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "C. " + cText, 0));
+                                    quiz.add(new Quiz(questionText, "C. " + cText, 0,
+                                            aText + '`' + bText + '`' + cText + '`' +
+                                                    dText + '`'));
                                     toast = Toast.makeText(context, "C" + cText,
                                             Toast.LENGTH_SHORT);
                                     clearForm();
                                 } else if(mRadioD.isChecked()) {
-                                    quiz.add(new Quiz(questionText, "D. " + dText, 0));
+                                    quiz.add(new Quiz(questionText, "D. " + dText, 0,
+                                            aText + '`' + bText + '`' + cText + '`' +
+                                                    dText + '`'));
                                     toast = Toast.makeText(context, "D" + dText,
                                             Toast.LENGTH_SHORT);
                                     clearForm();
@@ -332,7 +340,9 @@ public class QuizActivity extends AppCompatActivity {
                                     if(mCheckBoxD.isChecked()) {
                                         answerList = answerList + "D. " + dText;
                                     }
-                                    quiz.add(new Quiz(questionText, answerList, 1));
+                                    quiz.add(new Quiz(questionText, answerList, 1,
+                                            aText + '`' + bText + '`' + cText + '`' +
+                                                    dText + '`'));
                                     toast = Toast.makeText(context, answerList, Toast.LENGTH_SHORT);
                                     clearForm();
                                     answerList = "";
@@ -348,11 +358,13 @@ public class QuizActivity extends AppCompatActivity {
                             break;
                         case "True/False":
                             if (mRadioTrue.isChecked()) {
-                                quiz.add(new Quiz(questionText, "True", 2));
+                                quiz.add(new Quiz(questionText, "True", 2,
+                                        "True`False"));
                                 toast = Toast.makeText(context, "True", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else if (mRadioFalse.isChecked()) {
-                                quiz.add(new Quiz(questionText, "False", 2));
+                                quiz.add(new Quiz(questionText, "False", 2,
+                                        "True`False"));
                                 toast = Toast.makeText(context, "False", Toast.LENGTH_SHORT);
                                 clearForm();
                             } else {
@@ -368,7 +380,8 @@ public class QuizActivity extends AppCompatActivity {
                                         "(Max 30)", Toast.LENGTH_SHORT);
                             }
                             else if (shortAnswerText.length() > 0) {
-                                quiz.add(new Quiz(questionText, shortAnswerText, 3));
+                                quiz.add(new Quiz(questionText, shortAnswerText, 3,
+                                        shortAnswerText));
                                 toast = Toast.makeText(context, "Short answer",
                                         Toast.LENGTH_SHORT);
                                 clearForm();
