@@ -76,7 +76,8 @@ public class DisplayActivity extends AppCompatActivity {
         mFinishButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(DisplayActivity.this, QuestionActivity.class);
+                Intent intent = new Intent(DisplayActivity.this,
+                        QuestionActivity.class);
                 intent.putParcelableArrayListExtra("quiz", quiz);
                 startActivity(intent);
                 Log.d(TAG, "Started QuestionActivity");
