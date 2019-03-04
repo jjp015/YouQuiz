@@ -21,10 +21,11 @@ import java.util.ArrayList;
 
 public class QuestionActivity extends AppCompatActivity {
     private static final String TAG = "QuestionActivity";
-    ArrayList<Quiz> quizList;
-    ArrayList<Integer> result;
+    private ArrayList<Quiz> quizList;
+    private boolean checkAnswered[];
     private String question;
     private String answerChoice = "";
+    private String answerSubmit = "";
     private int questionType;
     private TextView mQuestionTextView;
     private RelativeLayout mMultipleCheckQuiz, mMultipleRadioQuiz, mTrueFalseRadioQuiz;
@@ -47,6 +48,7 @@ public class QuestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         final ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
         quizList = quiz;
+        checkAnswered = new boolean[quizList.size()];
         mQuestionTextView = findViewById(R.id.text_view);
         mTextShortAnswerLayoutQuiz = findViewById(R.id.short_answer_layout_quiz);
         mMultipleCheckQuiz = findViewById(R.id.multiple_check_quiz);
@@ -65,6 +67,10 @@ public class QuestionActivity extends AppCompatActivity {
         mCheckBoxDquiz = findViewById(R.id.check_d_quiz);
         mRadioTrueQuiz = findViewById(R.id.radio_true);
         mRadioFalseQuiz = findViewById(R.id.radio_false);
+
+        for(int i = 0; i < checkAnswered.length; i++) {
+            Log.d(TAG, "Boolean value: " + checkAnswered[i]);
+        }
 
         mRadioAquiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
@@ -113,8 +119,6 @@ public class QuestionActivity extends AppCompatActivity {
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
-        updateQuestion();
-        updateType();
         Log.d(TAG, "The number type is: " + questionType);
 
         mQuestionTextView.setOnClickListener(new View.OnClickListener() {
@@ -155,26 +159,82 @@ public class QuestionActivity extends AppCompatActivity {
         });
 
         mSubmitButtonQuiz = findViewById(R.id.submit_button_quiz);
+
         mSubmitButtonQuiz.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
+                Toast toast;
                 Context context = getApplicationContext();
                 switch(questionType) {
-                    case 0:
+                    case 0: //Multiple Choice
+                        if(mRadioAquiz.isChecked()) {
+                            multipleRadioSubmitDisable();
+                            answerSubmit = mRadioAquiz.getText().toString();
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast = Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else if(mRadioBquiz.isChecked()) {
+                            multipleRadioSubmitDisable();
+                            answerSubmit = mRadioBquiz.getText().toString();
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast = Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else if(mRadioCquiz.isChecked()) {
+                            multipleRadioSubmitDisable();
+                            answerSubmit.equals(mRadioCquiz.getText().toString());
+                            if(answerSubmit == quizList.get(mCurrentIndex).getAnswer()) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast = Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else if(mRadioDquiz.isChecked()) {
+                            multipleRadioSubmitDisable();
+                            answerSubmit.equals(mRadioDquiz.getText().toString());
+                            if(answerSubmit == quizList.get(mCurrentIndex).getAnswer()) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast = Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else {
+                            toast = Toast.makeText(context, "Select Answer!",
+                                    Toast.LENGTH_SHORT);
+                        }
+                        toast.show();
                         break;
-                    case 1:
+                    case 1: //Multiple Answer Choices
                         break;
-                    case 2:
+                    case 2: //True/False
                         break;
-                    case 3:
+                    case 3: //Short Answer
                         break;
                 }
             }
         });
+        updateQuestion();
+        updateType();
+    }
+
+    private void multipleRadioSubmitDisable() {
+        checkAnswered[mCurrentIndex] = true;
+        mSubmitButtonQuiz.setEnabled(false);
     }
 
     private void updateQuestion() {
         question = (mCurrentIndex + 1) + ". " + quizList.get(mCurrentIndex).getQuestion();
         mQuestionTextView.setText(question);
+        if(checkAnswered[mCurrentIndex]) mSubmitButtonQuiz.setEnabled(false);
+        else mSubmitButtonQuiz.setEnabled(true);
     }
 
     private void updateType() {
@@ -194,8 +254,8 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 counter++;
                 mRadioAquiz.setText(answerChoice);
-                answerChoice = "B. ";
 
+                answerChoice = "B. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
                     else {
@@ -206,8 +266,8 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 counter++;
                 mRadioBquiz.setText(answerChoice);
-                answerChoice = "C. ";
 
+                answerChoice = "C. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
                     else {
@@ -218,8 +278,8 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 counter++;
                 mRadioCquiz.setText(answerChoice);
-                answerChoice = "D. ";
 
+                answerChoice = "D. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
                     else {
@@ -248,8 +308,8 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 counter++;
                 mCheckBoxAquiz.setText(answerChoice);
-                answerChoice = "B. ";
 
+                answerChoice = "B. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
                     else {
@@ -260,8 +320,8 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 counter++;
                 mCheckBoxBquiz.setText(answerChoice);
-                answerChoice = "C. ";
 
+                answerChoice = "C. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
                     else {
@@ -272,8 +332,8 @@ public class QuestionActivity extends AppCompatActivity {
                 }
                 counter++;
                 mCheckBoxCquiz.setText(answerChoice);
-                answerChoice = "D. ";
 
+                answerChoice = "D. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(counter) == '`') break;
                     else {

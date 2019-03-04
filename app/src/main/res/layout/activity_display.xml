@@ -6,6 +6,7 @@
     android:scrollbars="none"
     android:layout_weight="1"
     tools:context=".DisplayActivity">
+
     <TableLayout
         android:id="@+id/display_activity"
         android:layout_width="match_parent"
@@ -34,6 +35,7 @@
                 android:layout_gravity="center"
                 android:layout_toEndOf="@id/back_button"/>
         </RelativeLayout>
+
         <TableRow
             android:id="@+id/table_row"
             android:layout_width="match_parent"
