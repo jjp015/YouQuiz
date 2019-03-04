@@ -27,7 +27,8 @@
         app:hintEnabled="false"
         app:errorEnabled="true"
         app:counterEnabled="true"
-        app:counterMaxLength="500" >
+        app:counterMaxLength="500"
+        android:paddingBottom="25dp" >
         <android.support.design.widget.TextInputEditText
             android:id="@+id/edit_text"
             android:layout_width="match_parent"
@@ -39,7 +40,8 @@
     <Spinner
         android:id="@+id/spinner"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:paddingBottom="25dp" >
     </Spinner>
 
     <RelativeLayout
@@ -134,7 +136,6 @@
                 android:hint="@string/option_d"
                 android:inputType="textCapSentences" />
         </android.support.design.widget.TextInputLayout>
-
     </RelativeLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -264,6 +265,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:gravity="center"
+        android:paddingTop="10dp"
         android:visibility="gone">
         <Button
             android:id="@+id/clear_button"
@@ -277,13 +279,13 @@
             android:text="@string/submit_button"
             android:layout_gravity="center"
             android:layout_toEndOf="@id/clear_button"/>
+        <Button
+            android:id="@+id/done_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/done_button"
+            android:layout_gravity="center"
+            android:layout_toEndOf="@id/submit_button"
+            android:visibility="gone"/>
     </RelativeLayout>
-
-    <Button
-        android:id="@+id/done_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="@string/done_button"
-        android:layout_gravity="center"
-        android:visibility="gone"/>
 </LinearLayout>
