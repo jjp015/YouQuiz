@@ -79,31 +79,40 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
-        <RadioGroup
-            android:layout_width="wrap_content"
+        <View
+            android:id="@+id/view_center_1.5"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:visibility="invisible"
+            android:layout_centerHorizontal="true"/>
+        <RadioButton
+            android:id="@+id/radio_a_quiz"
+            android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:id="@+id/multiple_radio_group_quiz">
-            <RadioButton
-                android:id="@+id/radio_a_quiz"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/option_a" />
-            <RadioButton
-                android:id="@+id/radio_b_quiz"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/option_b" />
-            <RadioButton
-                android:id="@+id/radio_c_quiz"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/option_c" />
-            <RadioButton
-                android:id="@+id/radio_d_quiz"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/option_d" />
-        </RadioGroup>
+            android:text="@string/option_a"
+            android:layout_alignParentStart="true"
+            android:layout_toStartOf="@id/view_center_1.5"/>
+        <RadioButton
+            android:id="@+id/radio_b_quiz"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/option_b"
+            android:layout_alignParentEnd="true"
+            android:layout_toEndOf="@id/view_center_1.5"/>
+        <RadioButton
+            android:id="@+id/radio_c_quiz"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/option_c"
+            android:layout_toStartOf="@id/view_center_1.5"
+            android:layout_below="@id/radio_a_quiz"/>
+        <RadioButton
+            android:id="@+id/radio_d_quiz"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/option_d"
+            android:layout_below="@id/radio_b_quiz"
+            android:layout_toEndOf="@id/radio_c_quiz"/>
     </RelativeLayout>
     <RelativeLayout
         android:id="@+id/true_false_radio_quiz"

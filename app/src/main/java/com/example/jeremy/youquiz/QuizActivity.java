@@ -17,6 +17,7 @@ import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -35,7 +36,7 @@ public class QuizActivity extends AppCompatActivity {
     private Button mDoneButton;
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
-    private RadioGroup mRadioGroupMultiple, mRadioGroupTrueFalse;
+    private RadioGroup mRadioGroupTrueFalse;
     private RadioButton mRadioA, mRadioB, mRadioC, mRadioD, mRadioTrue, mRadioFalse;
     private String spinnerChoice, questionText, shortAnswerText, aText, bText, cText, dText;
     private String answerList = "";
@@ -79,11 +80,54 @@ public class QuizActivity extends AppCompatActivity {
         mTextShortAnswerLayout = findViewById(R.id.short_answer_layout);
         mMultipleCheck = findViewById(R.id.multiple_check);
 
+        mRadioA.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioB.setChecked(false);
+                    mRadioC.setChecked(false);
+                    mRadioD.setChecked(false);
+                }
+            }
+        });
+
+        mRadioB.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioA.setChecked(false);
+                    mRadioC.setChecked(false);
+                    mRadioD.setChecked(false);
+                }
+            }
+        });
+
+        mRadioC.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioA.setChecked(false);
+                    mRadioB.setChecked(false);
+                    mRadioD.setChecked(false);
+                }
+            }
+        });
+
+        mRadioD.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioA.setChecked(false);
+                    mRadioB.setChecked(false);
+                    mRadioC.setChecked(false);
+                }
+            }
+        });
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 spinnerChoice = parent.getSelectedItem().toString();
-
                 switch (spinnerChoice) {
                     case "Select Option":
                         mMultipleInput.setVisibility(View.GONE);
@@ -239,16 +283,13 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
-
         mCheckBoxA = findViewById(R.id.check_a);
         mCheckBoxB = findViewById(R.id.check_b);
         mCheckBoxC = findViewById(R.id.check_c);
         mCheckBoxD = findViewById(R.id.check_d);
-        mRadioGroupMultiple = findViewById(R.id.multiple_radio_group);
         mRadioGroupTrueFalse = findViewById(R.id.true_false_radio_group);
         mSubmitButton = findViewById(R.id.submit_button);
         mClearButton = findViewById(R.id.clear_button);
-
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -441,7 +482,38 @@ public class QuizActivity extends AppCompatActivity {
         mCheckBoxB.setChecked(false);
         mCheckBoxC.setChecked(false);
         mCheckBoxD.setChecked(false);
-        mRadioGroupMultiple.clearCheck();
+        mRadioA.setChecked(false);
+        mRadioB.setChecked(false);
+        mRadioC.setChecked(false);
+        mRadioD.setChecked(false);
         mRadioGroupTrueFalse.clearCheck();
     }
+
+    /*
+    public void onRadioButtonClicked(CompoundButton buttonView) {
+        boolean checkClicked = ((RadioButton) buttonView).isChecked();
+        switch(buttonView.getId()) {
+            case R.id.radio_a:
+                mRadioB.setChecked(!checkClicked);
+                mRadioC.setChecked(!checkClicked);
+                mRadioD.setChecked(!checkClicked);
+                break;
+            case R.id.radio_b:
+                mRadioA.setChecked(!checkClicked);
+                mRadioC.setChecked(!checkClicked);
+                mRadioD.setChecked(!checkClicked);
+                break;
+            case R.id.radio_c:
+                mRadioA.setChecked(!checkClicked);
+                mRadioB.setChecked(!checkClicked);
+                mRadioD.setChecked(!checkClicked);
+                break;
+            case R.id.radio_d:
+                mRadioA.setChecked(!checkClicked);
+                mRadioB.setChecked(!checkClicked);
+                mRadioC.setChecked(!checkClicked);
+                break;
+        }
+    }
+    */
 }

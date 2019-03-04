@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
+import android.widget.CompoundButton;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -64,6 +65,50 @@ public class QuestionActivity extends AppCompatActivity {
         mCheckBoxDquiz = findViewById(R.id.check_d_quiz);
         mRadioTrueQuiz = findViewById(R.id.radio_true);
         mRadioFalseQuiz = findViewById(R.id.radio_false);
+
+        mRadioAquiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioBquiz.setChecked(false);
+                    mRadioCquiz.setChecked(false);
+                    mRadioDquiz.setChecked(false);
+                }
+            }
+        });
+
+        mRadioBquiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioAquiz.setChecked(false);
+                    mRadioCquiz.setChecked(false);
+                    mRadioDquiz.setChecked(false);
+                }
+            }
+        });
+
+        mRadioCquiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioAquiz.setChecked(false);
+                    mRadioBquiz.setChecked(false);
+                    mRadioDquiz.setChecked(false);
+                }
+            }
+        });
+
+        mRadioDquiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioAquiz.setChecked(false);
+                    mRadioBquiz.setChecked(false);
+                    mRadioCquiz.setChecked(false);
+                }
+            }
+        });
 
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
