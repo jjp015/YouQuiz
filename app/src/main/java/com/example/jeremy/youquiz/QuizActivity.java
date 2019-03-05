@@ -381,11 +381,11 @@ public class QuizActivity extends AppCompatActivity {
                                     if(mCheckBoxD.isChecked()) {
                                         answerList = answerList + "D. " + dText + "\n";
                                     }
-                                    answerList += "\nSubmitted!";
                                     quiz.add(new Quiz(questionText, answerList, 1,
                                             aText + '`' + bText + '`' + cText + '`' +
                                                     dText + '`'));
-                                    toast = Toast.makeText(context, answerList, Toast.LENGTH_SHORT);
+                                    toast = Toast.makeText(context, answerList + "\nSubmitted!"
+                                            , Toast.LENGTH_SHORT);
                                     clearForm();
                                     answerList = "";
                                 } else {

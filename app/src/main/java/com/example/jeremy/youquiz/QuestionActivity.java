@@ -10,6 +10,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
@@ -30,10 +31,11 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private RelativeLayout mMultipleCheckQuiz, mMultipleRadioQuiz, mTrueFalseRadioQuiz;
     private TextInputLayout mTextShortAnswerLayoutQuiz;
-    private RadioGroup mRadioGroupMultipleQuiz, mRadioGroupTrueFalseQuiz;
+    private RadioGroup mRadioGroupTrueFalseQuiz;
     private RadioButton mRadioAquiz, mRadioBquiz, mRadioCquiz, mRadioDquiz, mRadioTrueQuiz,
             mRadioFalseQuiz;
     private CheckBox mCheckBoxAquiz, mCheckBoxBquiz, mCheckBoxCquiz, mCheckBoxDquiz;
+    private EditText mShortAnswerQuiz;
     private ImageButton mPrevButton, mNextButton;
     private Button mBackButtonQuiz, mSubmitButtonQuiz;
     private boolean mAllAnswered = false;
@@ -167,7 +169,8 @@ public class QuestionActivity extends AppCompatActivity {
                 switch(questionType) {
                     case 0: //Multiple Choice
                         if(mRadioAquiz.isChecked()) {
-                            multipleRadioSubmitDisable();
+                            submitDisable();
+                            multipleButtonDisable();
                             answerSubmit = mRadioAquiz.getText().toString();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 mScore++;
@@ -177,7 +180,8 @@ public class QuestionActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG);
                         }
                         else if(mRadioBquiz.isChecked()) {
-                            multipleRadioSubmitDisable();
+                            submitDisable();
+                            multipleButtonDisable();
                             answerSubmit = mRadioBquiz.getText().toString();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 mScore++;
@@ -187,9 +191,10 @@ public class QuestionActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG);
                         }
                         else if(mRadioCquiz.isChecked()) {
-                            multipleRadioSubmitDisable();
+                            submitDisable();
+                            multipleButtonDisable();
                             answerSubmit.equals(mRadioCquiz.getText().toString());
-                            if(answerSubmit == quizList.get(mCurrentIndex).getAnswer()) {
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -197,9 +202,10 @@ public class QuestionActivity extends AppCompatActivity {
                                     Toast.LENGTH_LONG);
                         }
                         else if(mRadioDquiz.isChecked()) {
-                            multipleRadioSubmitDisable();
+                            submitDisable();
+                            multipleButtonDisable();
                             answerSubmit.equals(mRadioDquiz.getText().toString());
-                            if(answerSubmit == quizList.get(mCurrentIndex).getAnswer()) {
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -213,6 +219,38 @@ public class QuestionActivity extends AppCompatActivity {
                         toast.show();
                         break;
                     case 1: //Multiple Answer Choices
+                        answerSubmit = "";
+                        if(mCheckBoxAquiz.isChecked()) {
+                            answerSubmit += mCheckBoxAquiz.getText().toString() + "\n";
+                        }
+                        if(mCheckBoxBquiz.isChecked()) {
+                            answerSubmit +=  mCheckBoxBquiz.getText().toString() + "\n";
+                        }
+                        if(mCheckBoxCquiz.isChecked()) {
+                            answerSubmit +=  mCheckBoxCquiz.getText().toString() + "\n";
+                        }
+                        if(mCheckBoxDquiz.isChecked()) {
+                            answerSubmit +=  mCheckBoxDquiz.getText().toString() + "\n";
+                        }
+                        if(answerSubmit.length() <= 0) {
+                            toast = Toast.makeText(context, "Select Answer!",
+                                    Toast.LENGTH_SHORT);
+                            toast.show();
+                        }
+                        Log.d(TAG, answerSubmit);
+                        Log.d(TAG, quiz.get(mCurrentIndex).getAnswer());
+                        if(answerSubmit.equals(quiz.get(mCurrentIndex).getAnswer())) {
+                            mScore++;
+                            toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                        }
+                        else {
+                            toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_LONG);
+                        }
+                        if(answerSubmit.length() > 0) {
+                            submitDisable();
+                            multipleButtonDisable();
+                        }
+                        toast.show();
                         break;
                     case 2: //True/False
                         break;
@@ -225,7 +263,43 @@ public class QuestionActivity extends AppCompatActivity {
         updateType();
     }
 
-    private void multipleRadioSubmitDisable() {
+    private void checkBoxButtonEnable() {
+        mCheckBoxAquiz.setEnabled(true);
+        mCheckBoxBquiz.setEnabled(true);
+        mCheckBoxCquiz.setEnabled(true);
+        mCheckBoxDquiz.setEnabled(true);
+    }
+
+    private void checkBoxButtonDisable() {
+        mCheckBoxAquiz.setEnabled(false);
+        mCheckBoxBquiz.setEnabled(false);
+        mCheckBoxCquiz.setEnabled(false);
+        mCheckBoxDquiz.setEnabled(false);
+    }
+
+    private void trueFalseEnable() {
+        mRadioGroupTrueFalseQuiz.setEnabled(true);
+    }
+
+    private void trueFalseDisable() {
+        mRadioGroupTrueFalseQuiz.setEnabled(false);
+    }
+
+    private void multipleButtonEnable() {
+        mRadioAquiz.setEnabled(true);
+        mRadioBquiz.setEnabled(true);
+        mRadioCquiz.setEnabled(true);
+        mRadioDquiz.setEnabled(true);
+    }
+
+    private void multipleButtonDisable() {
+        mRadioAquiz.setEnabled(false);
+        mRadioBquiz.setEnabled(false);
+        mRadioCquiz.setEnabled(false);
+        mRadioDquiz.setEnabled(false);
+    }
+
+    private void submitDisable() {
         checkAnswered[mCurrentIndex] = true;
         mSubmitButtonQuiz.setEnabled(false);
     }
@@ -242,7 +316,8 @@ public class QuestionActivity extends AppCompatActivity {
         int counter = 0;
         switch(questionType) {
             case 0: //Multiple Choice
-                counter = 0;
+                if(!checkAnswered[mCurrentIndex]) multipleButtonEnable();
+                else multipleButtonDisable();
                 answerChoice = "A. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
                     if(quizList.get(mCurrentIndex).getAnswerChoice().charAt(i) == '`') break;
