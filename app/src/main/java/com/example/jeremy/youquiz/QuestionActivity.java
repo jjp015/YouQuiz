@@ -69,6 +69,7 @@ public class QuestionActivity extends AppCompatActivity {
         mCheckBoxDquiz = findViewById(R.id.check_d_quiz);
         mRadioTrueQuiz = findViewById(R.id.radio_true_quiz);
         mRadioFalseQuiz = findViewById(R.id.radio_false_quiz);
+        mShortAnswerQuiz = findViewById(R.id.short_answer_question_text_quiz);
 
         for(int i = 0; i < checkAnswered.length; i++) {
             Log.d(TAG, "Boolean value: " + checkAnswered[i]);
@@ -282,12 +283,36 @@ public class QuestionActivity extends AppCompatActivity {
                         toast.show();
                         break;
                     case 3: //Short Answer
+                        if(mShortAnswerQuiz.getText().toString().length() > 0) {
+                            submitDisable();
+                            shortAnswerDisable();
+                            answerSubmit = mShortAnswerQuiz.getText().toString().toLowerCase();
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer().toLowerCase())) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast =Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else {
+                            toast = Toast.makeText(context, "Enter Answer!",
+                                    Toast.LENGTH_SHORT);
+                        }
+                        toast.show();
                         break;
                 }
             }
         });
         updateQuestion();
         updateType();
+    }
+
+    private void shortAnswerEnable() {
+        mShortAnswerQuiz.setEnabled(true);
+    }
+
+    private void shortAnswerDisable() {
+        mShortAnswerQuiz.setEnabled(false);
     }
 
     private void checkBoxButtonEnable() {
@@ -464,6 +489,8 @@ public class QuestionActivity extends AppCompatActivity {
                 mMultipleCheckQuiz.setVisibility(View.GONE);
                 break;
             case 3: //Short Answer
+                if(!checkAnswered[mCurrentIndex]) shortAnswerEnable();
+                else shortAnswerDisable();
                 mTextShortAnswerLayoutQuiz.setVisibility(View.VISIBLE);
                 mMultipleRadioQuiz.setVisibility(View.GONE);
                 mTrueFalseRadioQuiz.setVisibility(View.GONE);
