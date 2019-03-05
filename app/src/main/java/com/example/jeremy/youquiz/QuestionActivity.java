@@ -13,7 +13,6 @@ import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,7 +30,6 @@ public class QuestionActivity extends AppCompatActivity {
     private TextView mQuestionTextView;
     private RelativeLayout mMultipleCheckQuiz, mMultipleRadioQuiz, mTrueFalseRadioQuiz;
     private TextInputLayout mTextShortAnswerLayoutQuiz;
-    private RadioGroup mRadioGroupTrueFalseQuiz;
     private RadioButton mRadioAquiz, mRadioBquiz, mRadioCquiz, mRadioDquiz, mRadioTrueQuiz,
             mRadioFalseQuiz;
     private CheckBox mCheckBoxAquiz, mCheckBoxBquiz, mCheckBoxCquiz, mCheckBoxDquiz;
@@ -319,6 +317,7 @@ public class QuestionActivity extends AppCompatActivity {
                         toast.show();
                         break;
                 }
+                clearAnswers();
             }
         });
         updateQuestion();
@@ -381,6 +380,7 @@ public class QuestionActivity extends AppCompatActivity {
         mQuestionTextView.setText(question);
         if(checkAnswered[mCurrentIndex]) mSubmitButtonQuiz.setEnabled(false);
         else mSubmitButtonQuiz.setEnabled(true);
+        clearAnswers();
     }
 
     private void updateType() {
@@ -515,5 +515,19 @@ public class QuestionActivity extends AppCompatActivity {
                 mMultipleCheckQuiz.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    private void clearAnswers() {
+        mShortAnswerQuiz.setText("");
+        mCheckBoxAquiz.setChecked(false);
+        mCheckBoxBquiz.setChecked(false);
+        mCheckBoxCquiz.setChecked(false);
+        mCheckBoxDquiz.setChecked(false);
+        mRadioAquiz.setChecked(false);
+        mRadioBquiz.setChecked(false);
+        mRadioCquiz.setChecked(false);
+        mRadioDquiz.setChecked(false);
+        mRadioTrueQuiz.setChecked(false);
+        mRadioFalseQuiz.setChecked(false);
     }
 }
