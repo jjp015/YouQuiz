@@ -248,7 +248,7 @@ public class QuestionActivity extends AppCompatActivity {
                         }
                         if(answerSubmit.length() > 0) {
                             submitDisable();
-                            multipleButtonDisable();
+                            checkBoxButtonDisable();
                         }
                         toast.show();
                         break;
