@@ -123,7 +123,7 @@ public class QuestionActivity extends AppCompatActivity {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 if (isChecked) {
-                    mRadioTrueQuiz.setChecked(false);
+                    mRadioFalseQuiz.setChecked(false);
                 }
             }
         });
@@ -515,19 +515,5 @@ public class QuestionActivity extends AppCompatActivity {
                 mMultipleCheckQuiz.setVisibility(View.GONE);
                 break;
         }
-    }
-
-    private void clearAnswer() {
-        mShortAnswerQuiz.setText("");
-        mCheckBoxAquiz.setChecked(false);
-        mCheckBoxBquiz.setChecked(false);
-        mCheckBoxCquiz.setChecked(false);
-        mCheckBoxDquiz.setChecked(false);
-        mRadioAquiz.setChecked(false);
-        mRadioBquiz.setChecked(false);
-        mRadioCquiz.setChecked(false);
-        mRadioDquiz.setChecked(false);
-        mRadioTrueQuiz.setChecked(false);
-        mRadioFalseQuiz.setChecked(false);
     }
 }
