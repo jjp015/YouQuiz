@@ -400,6 +400,8 @@ public class QuestionActivity extends AppCompatActivity {
                 mMultipleCheckQuiz.setVisibility(View.GONE);
                 break;
             case 1: //Multiple Answer Choices
+                if(!checkAnswered[mCurrentIndex]) checkBoxButtonEnable();
+                else checkBoxButtonDisable();
                 counter = 0;
                 answerChoice = "A. ";
                 for(int i = 0; i < quizList.get(mCurrentIndex).getAnswerChoice().length(); i++) {
