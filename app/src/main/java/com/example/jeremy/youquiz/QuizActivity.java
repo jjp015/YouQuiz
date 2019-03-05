@@ -122,6 +122,24 @@ public class QuizActivity extends AppCompatActivity {
             }
         });
 
+        mRadioTrue.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioFalse.setChecked(false);
+                }
+            }
+        });
+
+        mRadioFalse.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioTrue.setChecked(false);
+                }
+            }
+        });
+
         mSpinner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {

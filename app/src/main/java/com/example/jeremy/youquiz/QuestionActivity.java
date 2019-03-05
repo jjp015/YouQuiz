@@ -119,6 +119,24 @@ public class QuestionActivity extends AppCompatActivity {
             }
         });
 
+        mRadioTrueQuiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioTrueQuiz.setChecked(false);
+                }
+            }
+        });
+
+        mRadioFalseQuiz.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                if (isChecked) {
+                    mRadioTrueQuiz.setChecked(false);
+                }
+            }
+        });
+
         if (savedInstanceState != null)
             mCurrentIndex = savedInstanceState.getInt(KEY_INDEX, 0);
 
@@ -497,5 +515,19 @@ public class QuestionActivity extends AppCompatActivity {
                 mMultipleCheckQuiz.setVisibility(View.GONE);
                 break;
         }
+    }
+
+    private void clearAnswer() {
+        mShortAnswerQuiz.setText("");
+        mCheckBoxAquiz.setChecked(false);
+        mCheckBoxBquiz.setChecked(false);
+        mCheckBoxCquiz.setChecked(false);
+        mCheckBoxDquiz.setChecked(false);
+        mRadioAquiz.setChecked(false);
+        mRadioBquiz.setChecked(false);
+        mRadioCquiz.setChecked(false);
+        mRadioDquiz.setChecked(false);
+        mRadioTrueQuiz.setChecked(false);
+        mRadioFalseQuiz.setChecked(false);
     }
 }
