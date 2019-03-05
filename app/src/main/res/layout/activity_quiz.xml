@@ -202,21 +202,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:visibility="gone">
-        <RadioGroup
-            android:id="@+id/true_false_radio_group"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content">
-            <RadioButton
-                android:id="@+id/radio_true"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/true_button" />
-            <RadioButton
-                android:id="@+id/radio_false"
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/false_button" />
-        </RadioGroup>
+        <RadioButton
+            android:id="@+id/radio_true"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/true_button" />
+        <RadioButton
+            android:id="@+id/radio_false"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/false_button"
+            android:layout_below= "@id/radio_true"/>
     </RelativeLayout>
 
     <RelativeLayout

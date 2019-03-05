@@ -67,8 +67,8 @@ public class QuestionActivity extends AppCompatActivity {
         mCheckBoxBquiz = findViewById(R.id.check_b_quiz);
         mCheckBoxCquiz = findViewById(R.id.check_c_quiz);
         mCheckBoxDquiz = findViewById(R.id.check_d_quiz);
-        mRadioTrueQuiz = findViewById(R.id.radio_true);
-        mRadioFalseQuiz = findViewById(R.id.radio_false);
+        mRadioTrueQuiz = findViewById(R.id.radio_true_quiz);
+        mRadioFalseQuiz = findViewById(R.id.radio_false_quiz);
 
         for(int i = 0; i < checkAnswered.length; i++) {
             Log.d(TAG, "Boolean value: " + checkAnswered[i]);
@@ -253,6 +253,33 @@ public class QuestionActivity extends AppCompatActivity {
                         toast.show();
                         break;
                     case 2: //True/False
+                        if(mRadioTrueQuiz.isChecked()) {
+                            submitDisable();
+                            trueFalseDisable();
+                            answerSubmit = mRadioTrueQuiz.getText().toString();
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast = Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else if(mRadioFalseQuiz.isChecked()) {
+                            submitDisable();
+                            trueFalseDisable();
+                            answerSubmit = mRadioFalseQuiz.getText().toString();
+                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
+                                mScore++;
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else toast = Toast.makeText(context, "Incorrect",
+                                    Toast.LENGTH_LONG);
+                        }
+                        else {
+                            toast = Toast.makeText(context, "Select Answer!",
+                                    Toast.LENGTH_SHORT);
+                        }
+                        toast.show();
                         break;
                     case 3: //Short Answer
                         break;
@@ -278,11 +305,13 @@ public class QuestionActivity extends AppCompatActivity {
     }
 
     private void trueFalseEnable() {
-        mRadioGroupTrueFalseQuiz.setEnabled(true);
+        mRadioTrueQuiz.setEnabled(true);
+        mRadioFalseQuiz.setEnabled(true);
     }
 
     private void trueFalseDisable() {
-        mRadioGroupTrueFalseQuiz.setEnabled(false);
+       mRadioTrueQuiz.setEnabled(false);
+       mRadioFalseQuiz.setEnabled(false);
     }
 
     private void multipleButtonEnable() {
@@ -425,6 +454,8 @@ public class QuestionActivity extends AppCompatActivity {
                 mMultipleCheckQuiz.setVisibility(View.VISIBLE);
                 break;
             case 2: //True/False
+                if(!checkAnswered[mCurrentIndex]) trueFalseEnable();
+                else trueFalseDisable();
                 mTextShortAnswerLayoutQuiz.setVisibility(View.GONE);
                 mMultipleRadioQuiz.setVisibility(View.GONE);
                 mTrueFalseRadioQuiz.setVisibility(View.VISIBLE);

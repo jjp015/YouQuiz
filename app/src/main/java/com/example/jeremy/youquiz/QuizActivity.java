@@ -20,7 +20,6 @@ import android.widget.CheckBox;
 import android.widget.CompoundButton;
 import android.widget.EditText;
 import android.widget.RadioButton;
-import android.widget.RadioGroup;
 import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -36,7 +35,6 @@ public class QuizActivity extends AppCompatActivity {
     private Button mDoneButton;
     private EditText mShortAnswer;
     private CheckBox mCheckBoxA, mCheckBoxB, mCheckBoxC, mCheckBoxD;
-    private RadioGroup mRadioGroupTrueFalse;
     private RadioButton mRadioA, mRadioB, mRadioC, mRadioD, mRadioTrue, mRadioFalse;
     private String spinnerChoice, questionText, shortAnswerText, aText, bText, cText, dText;
     private String answerList = "";
@@ -287,7 +285,6 @@ public class QuizActivity extends AppCompatActivity {
         mCheckBoxB = findViewById(R.id.check_b);
         mCheckBoxC = findViewById(R.id.check_c);
         mCheckBoxD = findViewById(R.id.check_d);
-        mRadioGroupTrueFalse = findViewById(R.id.true_false_radio_group);
         mSubmitButton = findViewById(R.id.submit_button);
         mClearButton = findViewById(R.id.clear_button);
         mSubmitButton.setOnClickListener(new View.OnClickListener() {
@@ -489,7 +486,8 @@ public class QuizActivity extends AppCompatActivity {
         mRadioB.setChecked(false);
         mRadioC.setChecked(false);
         mRadioD.setChecked(false);
-        mRadioGroupTrueFalse.clearCheck();
+        mRadioTrue.setChecked(false);
+        mRadioFalse.setChecked(false);
     }
 
     /*
