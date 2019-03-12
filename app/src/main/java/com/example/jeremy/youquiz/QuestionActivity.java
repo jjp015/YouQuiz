@@ -20,7 +20,6 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class QuestionActivity extends AppCompatActivity {
-    private static final String TAG = "QuestionActivity";
     private ArrayList<Quiz> quizList;
     private boolean checkAnswered[];
     private String question;
@@ -36,10 +35,10 @@ public class QuestionActivity extends AppCompatActivity {
     private EditText mShortAnswerQuiz;
     private ImageButton mPrevButton, mNextButton;
     private Button mBackButtonQuiz, mSubmitButtonQuiz;
-    private boolean mAllAnswered = false;
-    private double mScore = 0;
+    private int mTotal = 0;
     private int mCurrentIndex = 0;
     private static final String KEY_INDEX = "index";
+    private static final String TAG = "QuestionActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -190,44 +189,44 @@ public class QuestionActivity extends AppCompatActivity {
                             multipleButtonDisable();
                             answerSubmit = mRadioAquiz.getText().toString();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast = Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else if(mRadioBquiz.isChecked()) {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit = mRadioBquiz.getText().toString();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast = Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else if(mRadioCquiz.isChecked()) {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit.equals(mRadioCquiz.getText().toString());
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast = Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else if(mRadioDquiz.isChecked()) {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit.equals(mRadioDquiz.getText().toString());
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast = Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else {
                             toast = Toast.makeText(context, "Select Answer!",
@@ -249,23 +248,23 @@ public class QuestionActivity extends AppCompatActivity {
                         if(mCheckBoxDquiz.isChecked()) {
                             answerSubmit +=  mCheckBoxDquiz.getText().toString() + "\n";
                         }
-                        if(answerSubmit.length() <= 0) {
-                            toast = Toast.makeText(context, "Select Answer!",
-                                    Toast.LENGTH_SHORT);
-                            toast.show();
-                        }
                         Log.d(TAG, answerSubmit);
                         Log.d(TAG, quiz.get(mCurrentIndex).getAnswer());
-                        if(answerSubmit.equals(quiz.get(mCurrentIndex).getAnswer())) {
-                            mScore++;
-                            toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
-                        }
-                        else {
-                            toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_LONG);
-                        }
+
                         if(answerSubmit.length() > 0) {
+                            if(answerSubmit.equals(quiz.get(mCurrentIndex).getAnswer())) {
+                                toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
+                            }
+                            else {
+                                toast = Toast.makeText(context, "Incorrect", Toast.LENGTH_LONG);
+                            }
                             submitDisable();
                             checkBoxButtonDisable();
+                            mTotal++;
+                        }
+                        else {
+                            toast = Toast.makeText(context, "Select Answer!",
+                                    Toast.LENGTH_SHORT);
                         }
                         toast.show();
                         break;
@@ -275,22 +274,22 @@ public class QuestionActivity extends AppCompatActivity {
                             trueFalseDisable();
                             answerSubmit = mRadioTrueQuiz.getText().toString();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast = Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else if(mRadioFalseQuiz.isChecked()) {
                             submitDisable();
                             trueFalseDisable();
                             answerSubmit = mRadioFalseQuiz.getText().toString();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast = Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else {
                             toast = Toast.makeText(context, "Select Answer!",
@@ -304,11 +303,11 @@ public class QuestionActivity extends AppCompatActivity {
                             shortAnswerDisable();
                             answerSubmit = mShortAnswerQuiz.getText().toString().toLowerCase();
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer().toLowerCase())) {
-                                mScore++;
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast =Toast.makeText(context, "Incorrect",
                                     Toast.LENGTH_LONG);
+                            mTotal++;
                         }
                         else {
                             toast = Toast.makeText(context, "Enter Answer!",
@@ -318,6 +317,14 @@ public class QuestionActivity extends AppCompatActivity {
                         break;
                 }
                 clearAnswers();
+                Log.d(TAG, "mTotal: " + mTotal + ", quizList: " + quizList.size());
+                if(mTotal >= quizList.size()) {
+                    Intent intent = new Intent(QuestionActivity.this,
+                            ResultActivity.class);
+                    intent.putParcelableArrayListExtra("quiz", quiz);
+                    startActivity(intent);
+                    Log.d(TAG, "Started ResultActivity");
+                }
             }
         });
         updateQuestion();

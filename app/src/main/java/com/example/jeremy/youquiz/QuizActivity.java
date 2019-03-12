@@ -27,6 +27,7 @@ import android.widget.Toast;
 import java.util.ArrayList;
 
 public class QuizActivity extends AppCompatActivity {
+    ArrayList<Quiz>quiz = new ArrayList<>();
     private RelativeLayout mMultipleInput, mMultipleCheck, mMultipleRadio, mTrueFalseRadio,
             mButtonGroup;
     private TextInputLayout mTextInputLayout, mTextShortAnswerLayout;
@@ -39,8 +40,6 @@ public class QuizActivity extends AppCompatActivity {
     private String spinnerChoice, questionText, shortAnswerText, aText, bText, cText, dText;
     private String answerList = "";
     private static final String TAG = "QuizActivity";
-
-    ArrayList<Quiz>quiz = new ArrayList<>();
 
     public QuizActivity() {
 
