@@ -200,6 +200,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit = mRadioBquiz.getText().toString();
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -211,6 +212,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit.equals(mRadioCquiz.getText().toString());
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -222,6 +224,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit.equals(mRadioDquiz.getText().toString());
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -253,6 +256,7 @@ public class QuestionActivity extends AppCompatActivity {
                         Log.d(TAG, quiz.get(mCurrentIndex).getAnswer());
 
                         if(answerSubmit.length() > 0) {
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quiz.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -305,6 +309,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             shortAnswerDisable();
                             answerSubmit = mShortAnswerQuiz.getText().toString().toLowerCase();
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer().toLowerCase())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
