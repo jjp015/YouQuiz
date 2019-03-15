@@ -36,8 +36,10 @@
     <string name="finish_button">Finish</string>
     <string name="empty_toast">Please fill in the input field(s)!</string>
     <string name="back_button">Back</string>
-    <string name="question">Questions</string>
-    <string name="answer">Answers</string>
+    <string name="question">Question</string>
+    <string name="answer">Answer</string>
     <string name="done_button">Done</string>
     <string name="number">%d.</string>
+    <string name="your_answer">Your Answer</string>
+    <string name="score">Score</string>
 </resources>
