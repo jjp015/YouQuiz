@@ -1,6 +1,7 @@
 package com.example.jeremy.youquiz;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -67,6 +68,12 @@ public class ResultActivity extends AppCompatActivity {
             answerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             answerText.setPaddingRelative(0,0,0,20);
             answerText.setText(quiz.get(i).getAnswer());
+
+            Log.d(TAG, "The user answer: " + quiz.get(i).getUserAnswer() + "-- The correct answer: " +
+                    quiz.get(i).getAnswer());
+            if(quiz.get(i).getUserAnswer().equals(quiz.get(i).getAnswer()))
+                userAnswerText.setTextColor(Color.GREEN);
+            else userAnswerText.setTextColor(Color.RED);
 
             tableRow[i].addView(numberText);
             tableRow[i].addView(questionText);
