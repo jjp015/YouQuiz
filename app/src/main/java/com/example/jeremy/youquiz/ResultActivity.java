@@ -19,11 +19,11 @@ public class ResultActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_display);
+        setContentView(R.layout.activity_result);
         Button mBackButton, mFinishButton;
         Intent intent = getIntent();
         final ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
-        TableLayout tableLayout = findViewById(R.id.display_activity);
+        TableLayout tableLayout = findViewById(R.id.result_activity);
         TableRow.LayoutParams layoutParams;
         TableRow[] tableRow = new TableRow[quiz.size()];
 
@@ -57,7 +57,7 @@ public class ResultActivity extends AppCompatActivity {
             userAnswerText.setGravity(Gravity.LEFT);
             userAnswerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             userAnswerText.setPaddingRelative(0,0,0,20);
-            userAnswerText.setText(quiz.get(i).getAnswerChoice());
+            userAnswerText.setText(quiz.get(i).getUserAnswer());
 
             TextView answerText = new TextView(getApplicationContext());
             layoutParams = new TableRow.LayoutParams(0,

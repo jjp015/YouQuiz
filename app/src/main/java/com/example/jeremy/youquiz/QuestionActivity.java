@@ -188,6 +188,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             multipleButtonDisable();
                             answerSubmit = mRadioAquiz.getText().toString();
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -273,6 +274,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             trueFalseDisable();
                             answerSubmit = mRadioTrueQuiz.getText().toString();
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
@@ -284,6 +286,7 @@ public class QuestionActivity extends AppCompatActivity {
                             submitDisable();
                             trueFalseDisable();
                             answerSubmit = mRadioFalseQuiz.getText().toString();
+                            quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }

@@ -33,6 +33,8 @@ public class Quiz implements Parcelable {
 
     public String getUserAnswer() { return mUserAnswer; }
 
+    public void setUserAnswer(String userAnswer) {mUserAnswer = userAnswer; };
+
     protected Quiz(Parcel in) {
         mQuestion = in.readString();
         mAnswer = in.readString();
