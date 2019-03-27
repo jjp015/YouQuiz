@@ -15,6 +15,7 @@ import android.widget.TextView;
 import java.util.ArrayList;
 
 public class ResultActivity extends AppCompatActivity {
+    double score = 0;
     private static final String TAG = "ResultActivity";
 
     @Override
@@ -71,8 +72,10 @@ public class ResultActivity extends AppCompatActivity {
 
             Log.d(TAG, "The user answer: " + quiz.get(i).getUserAnswer() + "-- The correct answer: " +
                     quiz.get(i).getAnswer());
-            if(quiz.get(i).getUserAnswer().equals(quiz.get(i).getAnswer()))
+            if(quiz.get(i).getUserAnswer().toLowerCase().equals(quiz.get(i).getAnswer().toLowerCase())) {
                 userAnswerText.setTextColor(Color.GREEN);
+                score++;
+            }
             else userAnswerText.setTextColor(Color.RED);
 
             tableRow[i].addView(numberText);
@@ -82,6 +85,8 @@ public class ResultActivity extends AppCompatActivity {
 
             tableLayout.addView(tableRow[i]);
         }
+
+        score = score / quiz.size();
 
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -97,7 +102,7 @@ public class ResultActivity extends AppCompatActivity {
                         QuestionActivity.class);
                 intent.putParcelableArrayListExtra("quiz", quiz);
                 startActivity(intent);
-                Log.d(TAG, "Started ResultActivity");
+                Log.d(TAG, "Finished quiz");
             }
         });
 
