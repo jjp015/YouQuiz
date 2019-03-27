@@ -310,7 +310,7 @@ public class QuestionActivity extends AppCompatActivity {
                             shortAnswerDisable();
                             answerSubmit = mShortAnswerQuiz.getText().toString();
                             quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
-                            if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer().toLowerCase())) {
+                            if(answerSubmit.toLowerCase().equals(quizList.get(mCurrentIndex).getAnswer().toLowerCase())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
                             }
                             else toast =Toast.makeText(context, "Incorrect",
