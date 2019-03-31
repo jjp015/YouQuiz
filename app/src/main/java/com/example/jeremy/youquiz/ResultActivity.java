@@ -28,15 +28,17 @@ public class ResultActivity extends AppCompatActivity {
         TableLayout tableLayout = findViewById(R.id.result_activity);
         TableRow.LayoutParams layoutParams;
         TableRow[] tableRow = new TableRow[quiz.size()];
+        TableRow[] scoreRow = new TableRow[1];
 
         mBackButton = findViewById(R.id.back_button);
         mFinishButton = findViewById(R.id.finish_button);
+
         for(int i = 0; i < quiz.size(); i++) {
             tableRow[i] = new TableRow(getApplicationContext());
 
             TextView numberText = new TextView(getApplicationContext());
-            layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 1.1f);
+            layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
+                    1.1f);
             numberText.setLayoutParams(layoutParams);
             numberText.setGravity(Gravity.END);
             numberText.setTextSize(getResources().getDimension(R.dimen.displaySize));
@@ -47,31 +49,28 @@ public class ResultActivity extends AppCompatActivity {
             layoutParams = new TableRow.LayoutParams(0,
                     TableRow.LayoutParams.WRAP_CONTENT, 5f);
             questionText.setLayoutParams(layoutParams);
-            questionText.setGravity(Gravity.LEFT);
             questionText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             questionText.setPaddingRelative(10,0,15,20);
             questionText.setText(quiz.get(i).getQuestion());
 
             TextView userAnswerText = new TextView(getApplicationContext());
-            layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 4f);
+            layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
+                    4f);
             userAnswerText.setLayoutParams(layoutParams);
-            userAnswerText.setGravity(Gravity.LEFT);
             userAnswerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             userAnswerText.setPaddingRelative(0,0,0,20);
             userAnswerText.setText(quiz.get(i).getUserAnswer());
 
             TextView answerText = new TextView(getApplicationContext());
-            layoutParams = new TableRow.LayoutParams(0,
-                    TableRow.LayoutParams.WRAP_CONTENT, 4f);
+            layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
+                    4f);
             answerText.setLayoutParams(layoutParams);
-            answerText.setGravity(Gravity.LEFT);
             answerText.setTextSize(getResources().getDimension(R.dimen.displaySize));
             answerText.setPaddingRelative(0,0,0,20);
             answerText.setText(quiz.get(i).getAnswer());
 
-            Log.d(TAG, "The user answer: " + quiz.get(i).getUserAnswer() + "-- The correct answer: " +
-                    quiz.get(i).getAnswer());
+            Log.d(TAG, "The user answer: " + quiz.get(i).getUserAnswer() + "-- The correct " +
+                    "answer: " + quiz.get(i).getAnswer());
             if(quiz.get(i).getUserAnswer().toLowerCase().equals(quiz.get(i).getAnswer().toLowerCase())) {
                 userAnswerText.setTextColor(Color.GREEN);
                 score++;
@@ -86,7 +85,17 @@ public class ResultActivity extends AppCompatActivity {
             tableLayout.addView(tableRow[i]);
         }
 
-        score = score / quiz.size();
+        score = score / quiz.size() * 100;
+        scoreRow[0] = new TableRow(getApplicationContext());
+        TextView scoreText = new TextView((getApplicationContext()));
+        layoutParams = new TableRow.LayoutParams(0, TableRow.LayoutParams.WRAP_CONTENT,
+                1.1f);
+        scoreText.setLayoutParams(layoutParams);
+        scoreText.setTextSize(getResources().getDimension(R.dimen.scoreSize));
+        scoreText.setPaddingRelative(40,40,0,0);
+        scoreRow[0].addView(scoreText);
+        tableLayout.addView(scoreRow[0]);
+        scoreText.setText(String.format("Score: %.02f%%", score));
 
         mBackButton.setOnClickListener(new View.OnClickListener() {
             @Override

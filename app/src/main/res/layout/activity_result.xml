@@ -37,8 +37,9 @@
                 android:layout_toEndOf="@id/back_button"/>
         </RelativeLayout>
 
+        <!--
         <TableRow
-            android:id="@+id/table_row1"
+            android:id="@+id/table_row0"
             android:layout_width="match_parent"
             android:layout_height="wrap_content">
             <TextView
@@ -48,15 +49,18 @@
                 android:layout_weight="5"
                 android:gravity="left"
                 android:paddingLeft="10dp"
-                android:textSize="20sp"
+                android:textSize="35sp"
                 android:textStyle="bold"
                 android:textColor="@color/colorPrimary"
                 android:text="@string/score" />
         </TableRow>
+        -->
+
         <TableRow
-            android:id="@+id/table_row0"
+            android:id="@+id/table_row1"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="wrap_content"
+            android:paddingTop="10dp">
             <TextView
                 android:id="@+id/question_list"
                 android:layout_width="wrap_content"
