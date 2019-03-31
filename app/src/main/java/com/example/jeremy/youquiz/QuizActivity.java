@@ -328,7 +328,7 @@ public class QuizActivity extends AppCompatActivity {
                                         "(Max 30)", Toast.LENGTH_SHORT);
                             }
                             else if (aText.length() > 0 && bText.length() > 0 && cText.length() > 0
-                                    && dText.toString().length() > 0) {
+                                    && dText.length() > 0) {
                                 if(mRadioA.isChecked()) {
                                     quiz.add(new Quiz(questionText, "A. " + aText, 0,
                                             aText + '`' + bText + '`' + cText + '`' +

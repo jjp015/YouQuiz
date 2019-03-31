@@ -211,7 +211,7 @@ public class QuestionActivity extends AppCompatActivity {
                         else if(mRadioCquiz.isChecked()) {
                             submitDisable();
                             multipleButtonDisable();
-                            answerSubmit.equals(mRadioCquiz.getText().toString());
+                            answerSubmit = mRadioCquiz.getText().toString();
                             quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
@@ -223,7 +223,7 @@ public class QuestionActivity extends AppCompatActivity {
                         else if(mRadioDquiz.isChecked()) {
                             submitDisable();
                             multipleButtonDisable();
-                            answerSubmit.equals(mRadioDquiz.getText().toString());
+                            answerSubmit = mRadioDquiz.getText().toString();
                             quizList.get(mCurrentIndex).setUserAnswer(answerSubmit);
                             if(answerSubmit.equals(quizList.get(mCurrentIndex).getAnswer())) {
                                 toast = Toast.makeText(context, "Correct", Toast.LENGTH_LONG);
