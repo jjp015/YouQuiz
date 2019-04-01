@@ -24,17 +24,17 @@
             android:layout_height="wrap_content"
             android:gravity="center">
             <Button
-                android:id="@+id/back_button"
+                android:id="@+id/retake_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/back_button"/>
+                android:text="@string/retake_button"/>
             <Button
-                android:id="@+id/finish_button"
+                android:id="@+id/reset_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="@string/finish_button"
+                android:text="@string/reset_button"
                 android:layout_gravity="center"
-                android:layout_toEndOf="@id/back_button"/>
+                android:layout_toEndOf="@id/retake_button"/>
         </RelativeLayout>
 
         <!--

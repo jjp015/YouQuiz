@@ -20,7 +20,7 @@ public class DisplayActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_display);
-        Button mBackButton, mFinishButton;
+        Button mBackButton, mFinishButton, mResetButton;
         Intent intent = getIntent();
         final ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
         TableLayout tableLayout = findViewById(R.id.display_activity);
@@ -29,6 +29,8 @@ public class DisplayActivity extends AppCompatActivity {
 
         mBackButton = findViewById(R.id.back_button);
         mFinishButton = findViewById(R.id.finish_button);
+        mResetButton = findViewById(R.id.reset_button);
+
         for(int i = 0; i < quiz.size(); i++) {
             tableRow[i] = new TableRow(getApplicationContext());
 
@@ -82,5 +84,13 @@ public class DisplayActivity extends AppCompatActivity {
             }
         });
 
+        mResetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 }

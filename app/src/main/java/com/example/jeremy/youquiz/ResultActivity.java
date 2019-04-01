@@ -22,7 +22,7 @@ public class ResultActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_result);
-        Button mBackButton, mFinishButton;
+        Button mRetakeButton, mResetButton;
         Intent intent = getIntent();
         final ArrayList<Quiz> quiz = intent.getParcelableArrayListExtra("quiz");
         TableLayout tableLayout = findViewById(R.id.result_activity);
@@ -30,8 +30,8 @@ public class ResultActivity extends AppCompatActivity {
         TableRow[] tableRow = new TableRow[quiz.size()];
         TableRow[] scoreRow = new TableRow[1];
 
-        mBackButton = findViewById(R.id.back_button);
-        mFinishButton = findViewById(R.id.finish_button);
+        mRetakeButton = findViewById(R.id.retake_button);
+        mResetButton = findViewById(R.id.reset_button);
 
         for(int i = 0; i < quiz.size(); i++) {
             tableRow[i] = new TableRow(getApplicationContext());
@@ -97,14 +97,7 @@ public class ResultActivity extends AppCompatActivity {
         tableLayout.addView(scoreRow[0]);
         scoreText.setText(String.format("Score: %.02f%%", score));
 
-        mBackButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                finish();
-            }
-        });
-
-        mFinishButton.setOnClickListener(new View.OnClickListener() {
+        mRetakeButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(ResultActivity.this,
@@ -115,6 +108,14 @@ public class ResultActivity extends AppCompatActivity {
             }
         });
 
+        mResetButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getApplicationContext(), QuizActivity.class);
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                startActivity(intent);
+            }
+        });
     }
 }
 
